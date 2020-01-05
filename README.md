@@ -1,2 +1,2 @@
 # AdaskoTheBeAsT.AutoMapper.SimpleInjector
-AutoMapper extensions to SimpleInjector
+AutoMapper extensions for SimpleInjector

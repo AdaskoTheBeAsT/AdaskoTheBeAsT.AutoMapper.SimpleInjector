@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C473F6FF-73EC-4653-9B0F-C5D47083FD5F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.SimpleInjector", "src\AdaskoTheBeAsT.AutoMapper.SimpleInjector\AdaskoTheBeAsT.AutoMapper.SimpleInjector.csproj", "{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E4A91754-105E-4484-A184-41787EE477DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test", "test\unit\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.csproj", "{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6BCA9799-1BD1-4A5D-A3C2-047187D026B1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		AdaskoTheBeAsT.ruleset = AdaskoTheBeAsT.ruleset
+		AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln.DotSettings = AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln.DotSettings
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+		SecurityCodeScan.config.yml = SecurityCodeScan.config.yml
+		Settings.StyleCop = Settings.StyleCop
+		stylecop.json = stylecop.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "src\TestApp\TestApp.csproj", "{8D2382C6-FE28-470D-9915-424215D9EE7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2382C6-FE28-470D-9915-424215D9EE7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2382C6-FE28-470D-9915-424215D9EE7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2382C6-FE28-470D-9915-424215D9EE7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2382C6-FE28-470D-9915-424215D9EE7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D} = {C473F6FF-73EC-4653-9B0F-C5D47083FD5F}
+		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7} = {E4A91754-105E-4484-A184-41787EE477DE}
+		{8D2382C6-FE28-470D-9915-424215D9EE7D} = {C473F6FF-73EC-4653-9B0F-C5D47083FD5F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E0CE43A-F3AD-4300-854B-A07804F518B2}
+	EndGlobalSection
+EndGlobal
