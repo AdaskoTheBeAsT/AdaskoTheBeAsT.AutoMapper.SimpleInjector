@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using AutoMapper;
 using FluentAssertions;
@@ -8,40 +9,104 @@ using Xunit;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 {
-    public class AssemblyResolutionTests
+    public sealed class AssemblyResolutionTests
+        : IDisposable
     {
-        private static readonly Container _container = BuildContainer();
+        private readonly Container _container;
+
+        public AssemblyResolutionTests()
+        {
+            _container = new Container();
+            _container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        }
 
         [Fact]
-        public void ShouldResolveConfiguration()
+        public void ShouldResolveConfigurationUsingAssemblyParams()
         {
+            _container.AddAutoMapper(typeof(Source).GetTypeInfo().Assembly);
             _container.GetInstance<IConfigurationProvider>().Should().NotBeNull();
         }
 
         [Fact]
-        public void ShouldConfigureProfiles()
+        public void ShouldConfigureProfilesUsingAssemblyParams()
         {
+            _container.AddAutoMapper(typeof(Source).GetTypeInfo().Assembly);
             _container.GetInstance<IConfigurationProvider>().GetAllTypeMaps().Should().HaveCount(3);
         }
 
         [Fact]
-        public void ShouldResolveMapper()
+        public void ShouldResolveMapperUsingAssemblyParams()
         {
+            _container.AddAutoMapper(typeof(Source).GetTypeInfo().Assembly);
             _container.GetInstance<IMapper>().Should().NotBeNull();
         }
 
         [Fact]
-        public void CanRegisterTwiceWithoutProblems()
+        public void ShouldResolveConfigurationUsingAssemblyIEnumerable()
         {
-            new Action(() => BuildContainer()).Should().NotThrow();
+            _container.AddAutoMapper(new List<Assembly> { typeof(Source).GetTypeInfo().Assembly });
+            _container.GetInstance<IConfigurationProvider>().Should().NotBeNull();
         }
 
-        private static Container BuildContainer()
+        [Fact]
+        public void ShouldConfigureProfilesUsingAssemblyIEnumerable()
         {
-            var container = new Container();
-            container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
-            container.AddAutoMapper(typeof(Source).GetTypeInfo().Assembly);
-            return container;
+            _container.AddAutoMapper(new List<Assembly> { typeof(Source).GetTypeInfo().Assembly });
+            _container.GetInstance<IConfigurationProvider>().GetAllTypeMaps().Should().HaveCount(3);
+        }
+
+        [Fact]
+        public void ShouldResolveMapperUsingAssemblyIEnumerable()
+        {
+            _container.AddAutoMapper(new List<Assembly> { typeof(Source).GetTypeInfo().Assembly });
+            _container.GetInstance<IMapper>().Should().NotBeNull();
+        }
+
+        [Fact]
+        public void ShouldResolveConfigurationUsingMapperAssemblyMarkerTypeParams()
+        {
+            _container.AddAutoMapper(typeof(Source));
+            _container.GetInstance<IConfigurationProvider>().Should().NotBeNull();
+        }
+
+        [Fact]
+        public void ShouldConfigureProfilesUsingMapperAssemblyMarkerTypeParams()
+        {
+            _container.AddAutoMapper(typeof(Source));
+            _container.GetInstance<IConfigurationProvider>().GetAllTypeMaps().Should().HaveCount(3);
+        }
+
+        [Fact]
+        public void ShouldResolveMapperUsingMapperAssemblyMarkerTypeParams()
+        {
+            _container.AddAutoMapper(typeof(Source));
+            _container.GetInstance<IMapper>().Should().NotBeNull();
+        }
+
+        [Fact]
+        public void ShouldResolveConfigurationUsingMapperAssemblyMarkerTypeIEnumerable()
+        {
+            _container.AddAutoMapper(new List<Type> { typeof(Source) });
+            _container.GetInstance<IConfigurationProvider>().Should().NotBeNull();
+        }
+
+        [Fact]
+        public void ShouldConfigureProfilesUsingMapperAssemblyMarkerTypeIEnumerable()
+        {
+            _container.AddAutoMapper(new List<Type> { typeof(Source) });
+            _container.GetInstance<IConfigurationProvider>().GetAllTypeMaps().Should().HaveCount(3);
+        }
+
+        [Fact]
+        public void ShouldResolveMapperUsingMapperAssemblyMarkerTypeIEnumerable()
+        {
+            _container.AddAutoMapper(new List<Type> { typeof(Source) });
+            _container.GetInstance<IMapper>().Should().NotBeNull();
+        }
+
+        public void Dispose()
+        {
+            _container.Dispose();
         }
     }
 }

@@ -7,6 +7,7 @@ using SimpleInjector;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
 {
+#pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
     /// <summary>
     /// Extensions to scan for AutoMapper classes and register the configuration, mapping, and extensions with SimpleInjector:
     /// <list type="bullet">
@@ -18,7 +19,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
     /// <item> Registers <see cref="IMapper"/> as a configurable <see cref="Lifestyle"/> (default is <see cref="Lifestyle.Singleton"/>)</item>
     /// </list>
     /// After calling AddAutoMapper you can resolve an <see cref="IMapper" /> instance from a scoped service provider, or as a dependency
-    /// To use <see cref="global::AutoMapper.QueryableExtensions.Extensions.ProjectTo{TDestination}(IQueryable,IConfigurationProvider, System.Linq.Expressions.Expression{System.Func{TDestination, object}}[])" />
+    /// To use <see cref="AutoMapper.QueryableExtensions.Extensions.ProjectTo{TDestination}(IQueryable,IConfigurationProvider, System.Linq.Expressions.Expression{System.Func{TDestination, object}}[])" />
     /// you can resolve the <see cref="IConfigurationProvider"/> instance directly for from an <see cref="IMapper" /> instance.
     /// </summary>
     public static class ContainerExtensions
@@ -111,7 +112,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
 
             if (serviceConfig.MapperImplementationType == typeof(Mapper))
             {
-                container.Register<IMapper>(
+                container.Register(
                     () => container.GetInstance<IConfigurationProvider>().CreateMapper(),
                     serviceConfig.Lifestyle);
             }
@@ -140,4 +141,5 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             container.Collection.Register(processorType, implementingTypes);
         }
     }
+#pragma warning restore CS1574 // XML comment has cref attribute that could not be resolved
 }

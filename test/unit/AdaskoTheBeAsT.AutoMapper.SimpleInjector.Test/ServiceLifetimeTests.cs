@@ -2,6 +2,7 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;
@@ -23,8 +24,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            }
         }
 
         [Fact]
@@ -40,8 +46,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            }
         }
 
         [Fact]
@@ -57,8 +68,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            }
         }
 
         [Fact]
@@ -77,8 +93,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Transient);
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Transient);
+            }
         }
 
         [Fact]
@@ -97,8 +118,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Name.Should().Be("Thread Scoped");
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Name.Should().Be("Thread Scoped");
+            }
         }
 
         [Fact]
@@ -118,8 +144,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
             // assert
-            serviceDescriptor.Should().NotBeNull();
-            serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            using (new AssertionScope())
+            {
+                serviceDescriptor.Should().NotBeNull();
+
+                // ReSharper disable once PossibleNullReferenceException
+                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+            }
         }
     }
 }

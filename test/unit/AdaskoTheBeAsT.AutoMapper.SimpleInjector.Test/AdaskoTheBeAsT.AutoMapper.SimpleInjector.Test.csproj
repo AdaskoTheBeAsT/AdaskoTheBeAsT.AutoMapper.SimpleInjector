@@ -1,7 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks>
+    <ProjectGuid>4B75EFC7-406C-423C-AB76-15FFFCF45CAD</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
