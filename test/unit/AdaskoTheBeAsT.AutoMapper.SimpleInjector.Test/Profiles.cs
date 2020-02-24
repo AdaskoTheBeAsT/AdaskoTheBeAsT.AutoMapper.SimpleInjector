@@ -17,13 +17,16 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
     public class Source2
     {
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int ConvertedValue { get; set; }
     }
 
     public class Dest2
     {
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int ResolvedValue { get; set; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int ConvertedValue { get; set; }
     }
 
@@ -35,6 +38,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
     [AutoMap(typeof(Source3))]
     public class Dest3
     {
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public int Value { get; set; }
     }
 

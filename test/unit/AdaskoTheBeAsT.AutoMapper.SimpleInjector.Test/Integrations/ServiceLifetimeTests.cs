@@ -62,11 +62,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
 
         internal class Foo
         {
+            // ReSharper disable once UnusedAutoPropertyAccessor.Global
             public int TheValue { get; set; }
         }
 
         internal class Bar
         {
+            // ReSharper disable once UnusedAutoPropertyAccessor.Global
             public int TheValue { get; set; }
         }
     }
