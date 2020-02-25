@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using AutoMapper;
 using FluentAssertions;
+using FluentAssertions.Execution;
+using Moq;
 using SimpleInjector;
 using Xunit;
 
@@ -19,19 +21,47 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         public CustomMapperTests()
         {
             _container = new Container();
+        }
+
+        [Fact]
+        public void ShouldResolveMapperWhenCustomMapperTypeProvided()
+        {
+            // Arrange & Act
             _container.AddAutoMapper(
                 cfg =>
                 {
                     cfg.Using<MyCustomMapper>();
                     cfg.WithMapperAssemblyMarkerTypes(typeof(CustomMapperTests));
                 });
+
+            // Assert
+            using (new AssertionScope())
+            {
+                _container.GetInstance<IMapper>().Should().NotBeNull();
+                _container.GetInstance<IMapper>().GetType().Should().Be(typeof(MyCustomMapper));
+            }
         }
 
         [Fact]
-        public void ShouldResolveMapper()
+        public void ShouldResolveMapperWhenCustomMapperInstanceProvided()
         {
-            _container.GetInstance<IMapper>().Should().NotBeNull();
-            _container.GetInstance<IMapper>().GetType().Should().Be(typeof(MyCustomMapper));
+            // Arrange
+            var customMapper = new Mock<IMapper>();
+
+            // Act
+            _container.AddAutoMapper(
+                cfg =>
+                {
+                    cfg.Using(() => customMapper.Object);
+                    cfg.WithMapperAssemblyMarkerTypes(typeof(CustomMapperTests));
+                });
+
+            // Assert
+            using (new AssertionScope())
+            {
+                _container.GetInstance<IMapper>().Should().NotBeNull();
+                _container.GetInstance<IMapper>().GetType().Should().Be(customMapper.Object.GetType());
+            }
         }
 
         public void Dispose()

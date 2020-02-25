@@ -34,7 +34,7 @@ There are few options to use with `Container` instance:
 
     ```cs
     [ExcludeFromCodeCoverage]
-    public static class MediatRConfigurator
+    public static class AutoMapperConfigurator
     {
         private const string NamespacePrefix = "YourNamespace";
 
@@ -42,7 +42,7 @@ There are few options to use with `Container` instance:
         {
             var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
             var assemblies = new List<Assembly>();
-            var mainAssembly = typeof(MediatrConfigurer).Assembly;
+            var mainAssembly = typeof(AutoMapperConfigurator).Assembly;
             var refAssemblies = mainAssembly.GetReferencedAssemblies();
             foreach (var assemblyName in refAssemblies
                 .Where(a => a.FullName.StartsWith(NamespacePrefix, StringComparison.OrdinalIgnoreCase)))
@@ -71,6 +71,18 @@ Mapping configuration is static as it is the root object that can create an `IMa
 Mapper instance are registered as singleton. You can configure this with the `Lifestyle` parameter. Be careful changing this, as `Mapper` takes a dependency on a factory method to instantiate the other extensions.
 
 ## Advanced usage
+
+### Setting up custom `IMapper` instance and marker type from assembly for unit testing (Moq sample)
+
+   ```cs
+    var testMapper = new Mock<IMapper>();
+    container.AddAutoMapper(
+        cfg =>
+        {
+            cfg.Using(() => testMapper.Object);
+            cfg.WithMapperAssemblyMarkerTypes(typeof(MyMarkerType));
+        });
+   ```
 
 ### Setting up custom `IMapper` implementation and marker type from assembly
 

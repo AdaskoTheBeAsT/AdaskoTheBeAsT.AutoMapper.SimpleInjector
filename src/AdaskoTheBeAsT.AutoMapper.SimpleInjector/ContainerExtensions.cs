@@ -110,7 +110,15 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
                         cfg => ConfigAction(container, cfg)),
                 Lifestyle.Singleton);
 
-            if (serviceConfig.MapperImplementationType == typeof(Mapper))
+            var customMapperInstance = serviceConfig.MapperInstanceCreator();
+
+            if (customMapperInstance != null)
+            {
+                container.Register(
+                    () => customMapperInstance,
+                    serviceConfig.Lifestyle);
+            }
+            else if (serviceConfig.MapperImplementationType == typeof(Mapper))
             {
                 container.Register(
                     () => container.GetInstance<IConfigurationProvider>().CreateMapper(),

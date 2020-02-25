@@ -21,9 +21,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
                 container,
                 expression) =>
             {
+                // ReSharper disable once AssignmentIsFullyDiscarded
                 _ = container;
+
+                // ReSharper disable once AssignmentIsFullyDiscarded
                 _ = expression;
             };
+            MapperInstanceCreator = () => null;
         }
 
         /// <summary>
@@ -31,6 +35,14 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
         /// Default is <see cref="Mapper"/>.
         /// </summary>
         public Type MapperImplementationType { get; private set; }
+
+        /// <summary>
+        /// Custom instance creator of <see cref="IMapper"/>.
+        /// Can be used for mocking AutoMapper.
+        /// If not null then it takes precedence over MapperImplementationType.
+        /// MapperConfigurationExpressionAction is not invoked then.
+        /// </summary>
+        public Func<IMapper?> MapperInstanceCreator { get; private set; }
 
         /// <summary>
         /// Lifestyle in which <see cref="IMapper"/> implementation will be registered.
@@ -60,6 +72,22 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             where TMapper : IMapper
         {
             MapperImplementationType = typeof(TMapper);
+            return this;
+        }
+
+        /// <summary>
+        /// Register custom IMapper instance creator
+        /// instead of default one <see cref="Mapper"/>.
+        /// MapperConfigurationExpressionAction is not invoked when instance is used.
+        /// </summary>
+        /// <param name="instanceCreator">Custom <see cref="IMapper"/> instance creator function.</param>
+        /// <returns><see cref="AutoMapperSimpleInjectorConfiguration"/>
+        /// with custom <see cref="IMapper"/> instance creator function.</returns>
+        public AutoMapperSimpleInjectorConfiguration Using(Func<IMapper> instanceCreator)
+        {
+            MapperInstanceCreator =
+                instanceCreator
+                ?? throw new ArgumentNullException(nameof(instanceCreator));
             return this;
         }
 
