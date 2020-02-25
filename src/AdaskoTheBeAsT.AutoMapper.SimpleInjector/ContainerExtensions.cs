@@ -91,11 +91,11 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
 
             var uniqueAssemblies = serviceConfig.AssembliesToScan.Distinct().ToArray();
 
-            RegisterIncludingGenericTypeDefinitions(container, uniqueAssemblies, typeof(IValueResolver<,,>));
-            RegisterIncludingGenericTypeDefinitions(container, uniqueAssemblies, typeof(IMemberValueResolver<,,,>));
-            RegisterIncludingGenericTypeDefinitions(container, uniqueAssemblies, typeof(ITypeConverter<,>));
-            RegisterIncludingGenericTypeDefinitions(container, uniqueAssemblies, typeof(IValueConverter<,>));
-            RegisterIncludingGenericTypeDefinitions(container, uniqueAssemblies, typeof(IMappingAction<,>));
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueResolver<,,>));
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMemberValueResolver<,,,>));
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(ITypeConverter<,>));
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueConverter<,>));
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMappingAction<,>));
 
             void ConfigAction(Container c, IMapperConfigurationExpression cfg)
             {
@@ -125,7 +125,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
         }
 
         internal static void RegisterIncludingGenericTypeDefinitions(
-            Container container,
+            this Container container,
             Assembly[] uniqueAssemblies,
             Type processorType)
         {

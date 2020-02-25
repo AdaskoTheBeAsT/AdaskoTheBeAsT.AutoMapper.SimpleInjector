@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E4A91754-105E-4484-A184-41787EE477DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test", "test\unit\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.csproj", "{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test", "test\unit\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.csproj", "{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6BCA9799-1BD1-4A5D-A3C2-047187D026B1}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,6 +27,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{42279621-9534-4528-B8F6-32A55A3A88C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{1A1129E3-F15B-4468-A555-9C9436FDE437}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.props = test\Directory.Build.props
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,17 +44,19 @@ Global
 		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D} = {C473F6FF-73EC-4653-9B0F-C5D47083FD5F}
-		{03E8CFA5-C27E-4CEF-B8A9-8C0D465C8FC7} = {E4A91754-105E-4484-A184-41787EE477DE}
+		{4B75EFC7-406C-423C-AB76-15FFFCF45CAD} = {42279621-9534-4528-B8F6-32A55A3A88C2}
+		{42279621-9534-4528-B8F6-32A55A3A88C2} = {E4A91754-105E-4484-A184-41787EE477DE}
+		{1A1129E3-F15B-4468-A555-9C9436FDE437} = {E4A91754-105E-4484-A184-41787EE477DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E0CE43A-F3AD-4300-854B-A07804F518B2}

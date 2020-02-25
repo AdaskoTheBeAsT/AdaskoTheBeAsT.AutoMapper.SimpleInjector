@@ -21,6 +21,8 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
                 container,
                 expression) =>
             {
+                _ = container;
+                _ = expression;
             };
         }
 

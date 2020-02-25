@@ -1,7 +1,19 @@
 # AdaskoTheBeAsT.AutoMapper.SimpleInjector
+
 AutoMapper extensions for SimpleInjector
 
-## Usage 
+## Badges
+[![Build Status](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_apis/build/status/AdaskoTheBeAsT.AdaskoTheBeAsT.AutoMapper.SimpleInjector?branchName=master)](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_build/latest?definitionId=8&branchName=master)
+![Azure DevOps tests](https://img.shields.io/azure-devops/tests/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/8)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/8?style=plastic)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=alert_status)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+![Sonar Tests](https://img.shields.io/sonar/tests/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Test Count](https://img.shields.io/sonar/total_tests/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Test Execution Time](https://img.shields.io/sonar/test_execution_time/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io)
+![Sonar Coverage](https://img.shields.io/sonar/coverage/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io&style=plastic)
+![Nuget](https://img.shields.io/nuget/dt/AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+
+## Usage
 
 Scans assemblies and:
 
