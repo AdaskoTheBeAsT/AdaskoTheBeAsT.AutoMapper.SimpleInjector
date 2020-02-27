@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E4A91754-1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test", "test\unit\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test\AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.csproj", "{4B75EFC7-406C-423C-AB76-15FFFCF45CAD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6BCA9799-1BD1-4A5D-A3C2-047187D026B1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{6BCA9799-1BD1-4A5D-A3C2-047187D026B1}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore

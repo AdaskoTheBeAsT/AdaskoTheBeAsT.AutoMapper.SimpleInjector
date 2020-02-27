@@ -11,8 +11,11 @@
     <PackageProjectUrl>https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector</PackageProjectUrl>
     <RepositoryUrl>https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector</RepositoryUrl>
     <Description>AutoMapper extensions for SimpleInjector</Description>
-    <PackageVersion>1.2.0</PackageVersion>
+    <PackageVersion>1.2.1</PackageVersion>
     <Authors>Adam "AdaskoTheBeAsT" Pluciński</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,23 +23,11 @@
     <PackageReference Include="SimpleInjector" Version="4.9.0" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <_DesiredLicenseFileName>LICENSE</_DesiredLicenseFileName>
-    <_InternalLicenseFileName>LICENSE.txt</_InternalLicenseFileName>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <PackageLicenseFile>$(_InternalLicenseFileName)</PackageLicenseFile>
-  </PropertyGroup>
-
   <ItemGroup>
-    <None Include="..\..\$(_InternalLicenseFileName)" Pack="true" PackagePath="$(_InternalLicenseFileName)">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-
-  <Target Name="CopyLicenseFileForPackagingPurposes" BeforeTargets="BeforeBuild" Condition="!Exists('..\..\$(_InternalLicenseFileName)')">
-    <Copy SourceFiles="..\..\$(_DesiredLicenseFileName)" DestinationFiles="..\..\$(_InternalLicenseFileName)" />
-  </Target>
 
 </Project>
