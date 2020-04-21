@@ -37,7 +37,7 @@ steps:
     projectKey: 'AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector'
     projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector
     extraProperties: |
-      sonar.resharper.cs.reportPath='$(Build.SourcesDirectory)/CodeQualityResults.xml'
+      sonar.resharper.cs.reportPath=$(Build.SourcesDirectory)\CodeQualityResults.xml
     
   
 - task: DotNetCoreCLI@2
