@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".props", ".props", "{6BCA97
 		SecurityCodeScan.config.yml = SecurityCodeScan.config.yml
 		Settings.StyleCop = Settings.StyleCop
 		stylecop.json = stylecop.json
+		DeterministicBuild.targets = DeterministicBuild.targets
+		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{42279621-9534-4528-B8F6-32A55A3A88C2}"

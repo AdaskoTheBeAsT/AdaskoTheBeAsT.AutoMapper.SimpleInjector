@@ -12,6 +12,8 @@ pool:
 variables:
   buildConfiguration: 'Release'
   unitTestProjects: '**/test/unit/**/*.csproj'
+  testResultsDirectory: 'd:/a/1/TestResults'
+  MSBUILDSINGLELOADCONTEXT: 1
   
 steps:
 - task: UseDotNet@2
@@ -40,14 +42,33 @@ steps:
   displayName: Build
   inputs:
     arguments: 'AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln --configuration $(buildConfiguration)'
+
+- task: DeleteFiles@1
+  displayName: 'Clear nuget staging directory'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/nuget'
+    Contents: '**/*'
+
+- task: CopyFiles@2
+  displayName: 'Copy nuget packages'
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)/src/AdaskoTheBeAsT.AutoMapper.SimpleInjector/bin/$(BuildConfiguration)'
+    contents: '(AdaskoTheBeAsT.*.nupkg|AdaskoTheBeAsT.*.snupkg)'
+    targetFolder: '$(Build.SourcesDirectory)/nuget'
   
+- task: DeleteFiles@1
+  displayName: 'Clear test results'
+  inputs:
+    SourceFolder: '$(testResultsDirectory)'
+    Contents: '**/*'    
+
 - task: DotNetCoreCLI@2
   displayName: Test
   inputs:
     command: test
     projects: '$(unitTestProjects)'
     publishTestResults: false
-    arguments: '--configuration $(buildConfiguration) --collect:"Code Coverage" --logger:"trx" --results-directory d:/a/1/TestResults'
+    arguments: '--configuration $(buildConfiguration) /t:rebuild /p:ContinuousIntegrationBuild=false --collect:"Code Coverage" --logger:"trx" --results-directory $(testResultsDirectory)'
 
 - task: ResharperCli@2
   inputs:
@@ -67,4 +88,22 @@ steps:
   inputs:
     testResultsFormat: 'VSTest'
     testResultsFiles: '*.trx'
-    searchFolder: 'd:/a/1/TestResults'
+    searchFolder: '$(testResultsDirectory)'
+
+- task: DeleteFiles@1
+  displayName: 'Clear staging directory'
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '**/*'
+    
+- task: CopyFiles@2
+  displayName: 'Copy nuget packages'
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)/nuget'
+    contents: '**/*'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'    
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: NugetPackages

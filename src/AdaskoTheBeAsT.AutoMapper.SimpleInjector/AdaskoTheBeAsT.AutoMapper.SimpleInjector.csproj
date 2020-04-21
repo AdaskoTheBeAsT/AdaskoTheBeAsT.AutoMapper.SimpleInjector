@@ -8,19 +8,26 @@
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <RepositoryType>github</RepositoryType>
-    <PackageProjectUrl>https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Description>AutoMapper extensions for SimpleInjector</Description>
-    <PackageVersion>1.2.3</PackageVersion>
+    <PackageVersion>1.2.4</PackageVersion>
     <Authors>Adam "AdaskoTheBeAsT" Pluciński</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="SimpleInjector" Version="4.9.2" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
