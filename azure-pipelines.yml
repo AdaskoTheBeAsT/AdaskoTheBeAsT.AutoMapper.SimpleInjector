@@ -36,6 +36,8 @@ steps:
     organization: 'adaskothebeast-github'
     projectKey: 'AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector'
     projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector
+    extraProperties: |
+      sonar.resharper.cs.reportPath='$(Build.SourcesDirectory)/CodeQualityResults.xml'
     
   
 - task: DotNetCoreCLI@2
@@ -70,6 +72,7 @@ steps:
   inputs:
     solutionOrProjectPath: 'AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln'
     failBuildLevelSelector: 'Warning'
+    resultsOutputFilePath: '$(Build.SourcesDirectory)/CodeQualityResults.xml'
   
 - task: SonarCloudAnalyze@1
   displayName: Sonar Cloud analyze
