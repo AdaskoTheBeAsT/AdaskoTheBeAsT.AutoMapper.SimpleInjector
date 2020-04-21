@@ -97,17 +97,22 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueConverter<,>));
             container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMappingAction<,>));
 
-            void ConfigAction(Container c, IMapperConfigurationExpression cfg)
+            void ConfigAction(
+                Container c,
+                IMapperConfigurationExpression cfg,
+                AutoMapperSimpleInjectorConfiguration serviceCfg)
             {
-                serviceConfig.MapperConfigurationExpressionAction?.Invoke(c, cfg);
+                serviceCfg.MapperConfigurationExpressionAction?.Invoke(
+                    c,
+                    cfg);
                 cfg.ConstructServicesUsing(c.GetInstance);
-                cfg.AddMaps(serviceConfig.AssembliesToScan);
+                cfg.AddMaps(serviceCfg.AssembliesToScan);
             }
 
             container.Register<IConfigurationProvider>(
                 () =>
                     new MapperConfiguration(
-                        cfg => ConfigAction(container, cfg)),
+                        cfg => ConfigAction(container, cfg, serviceConfig)),
                 Lifestyle.Singleton);
 
             var customMapperInstance = serviceConfig.MapperInstanceCreator();
