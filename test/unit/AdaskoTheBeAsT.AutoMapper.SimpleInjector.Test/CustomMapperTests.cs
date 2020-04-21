@@ -158,7 +158,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
             public IQueryable<TDestination> ProjectTo<TDestination>(
                 IQueryable source,
-                object parameters = null,
+                object? parameters = null,
                 params Expression<Func<TDestination, object>>[] membersToExpand)
             {
                 throw new NotImplementedException();
