@@ -46,7 +46,7 @@ steps:
 - task: CopyFiles@2
   displayName: 'Copy nuget packages'
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)/src/AdaskoTheBeAsT.AutoMapper.SimpleInjector/bin/$(BuildConfiguration)'
+    sourceFolder: '$(Build.SourcesDirectory)'
     contents: '**/$(BuildConfiguration)/**/?(AdaskoTheBeAsT.*.nupkg|AdaskoTheBeAsT.*.snupkg)'
     targetFolder: '$(Build.SourcesDirectory)/nuget'
     CleanTargetFolder: true
