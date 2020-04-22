@@ -5,6 +5,12 @@
 
 trigger:
 - master
+  tags:
+    include:
+      - *
+
+pr:
+- master
 
 pool:
   vmImage: 'windows-2019'
@@ -35,8 +41,7 @@ steps:
     SonarCloud: 'AdaskoTheBeAsT.AutoMapper.SimpleInjector.SonarCloud'
     organization: 'adaskothebeast-github'
     projectKey: 'AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector'
-    projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector
-    
+    projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector 
   
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -98,3 +103,19 @@ steps:
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: NugetPackages
+
+- task: NuGetToolInstaller@1
+  displayName: 'Install nuget'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  inputs:
+    versionSpec:
+    checkLatest: true
+
+- task: NuGetCommand@2
+  displayName: 'Publish to nuget'
+  condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.snupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'Nuget'

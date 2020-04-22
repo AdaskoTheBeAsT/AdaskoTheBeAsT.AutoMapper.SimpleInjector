@@ -97,18 +97,6 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueConverter<,>));
             container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMappingAction<,>));
 
-            void ConfigAction(
-                Container c,
-                IMapperConfigurationExpression cfg,
-                AutoMapperSimpleInjectorConfiguration serviceCfg)
-            {
-                serviceCfg.MapperConfigurationExpressionAction?.Invoke(
-                    c,
-                    cfg);
-                cfg.ConstructServicesUsing(c.GetInstance);
-                cfg.AddMaps(serviceCfg.AssembliesToScan);
-            }
-
             container.Register<IConfigurationProvider>(
                 () =>
                     new MapperConfiguration(
@@ -135,6 +123,18 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             }
 
             return container;
+        }
+
+        internal static void ConfigAction(
+            Container c,
+            IMapperConfigurationExpression cfg,
+            AutoMapperSimpleInjectorConfiguration serviceCfg)
+        {
+            serviceCfg.MapperConfigurationExpressionAction?.Invoke(
+                c,
+                cfg);
+            cfg.ConstructServicesUsing(c.GetInstance);
+            cfg.AddMaps(serviceCfg.AssembliesToScan);
         }
 
         internal static void RegisterIncludingGenericTypeDefinitions(
