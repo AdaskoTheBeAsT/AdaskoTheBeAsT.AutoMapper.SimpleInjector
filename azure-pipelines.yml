@@ -5,12 +5,7 @@
 
 trigger:
 - master
-  tags:
-    include:
-      - *
-
-pr:
-- master
+- refs/tags/v*
 
 pool:
   vmImage: 'windows-2019'
@@ -42,6 +37,9 @@ steps:
     organization: 'adaskothebeast-github'
     projectKey: 'AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector'
     projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector 
+    extraProperties: |
+      sonar.resharper.cs.reportPath=$(Build.SourcesDirectory)/CodeQualityResults.xml
+      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/TestResults/Coverage/coverage.opencover.xml
   
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -69,12 +67,13 @@ steps:
     command: test
     projects: '$(unitTestProjects)'
     publishTestResults: false
-    arguments: '--configuration $(buildConfiguration) /t:rebuild /p:ContinuousIntegrationBuild=false --collect:"Code Coverage" --logger:"trx" --results-directory $(testResultsDirectory)'
+    arguments: '--configuration $(buildConfiguration) /t:rebuild /p:ContinuousIntegrationBuild=false /p:CollectCoverage=true "/p:CoverletOutputFormat=\"opencover,Cobertura\"" --logger:"trx" --results-directory $(testResultsDirectory)'
 
 - task: ResharperCli@2
   inputs:
     solutionOrProjectPath: 'AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln'
     failBuildLevelSelector: 'Warning'
+    resultsOutputFilePath: '$(Build.SourcesDirectory)/CodeQualityResults.xml'
   
 - task: SonarCloudAnalyze@1
   displayName: Sonar Cloud analyze
