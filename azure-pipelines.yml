@@ -93,9 +93,8 @@ steps:
 
 - task: reportgenerator@4
   inputs:
-    reports: 'coverage.*.cobertura.xml'
+    reports: '$(testResultsDirectory)/coverage.*.cobertura.xml'
     targetdir: '$(testResultsDirectory)/coverage'
-    sourcedirs: '$(testResultsDirectory)'
 
 - task: PublishCodeCoverageResults@1
   inputs:
