@@ -68,7 +68,7 @@ steps:
     command: test
     projects: '$(unitTestProjects)'
     publishTestResults: false
-    arguments: '--configuration $(buildConfiguration) /t:rebuild /p:ContinuousIntegrationBuild=false /p:CollectCoverage=true "/p:CoverletOutputFormat=\"opencover,cobertura\"" /p:CoverletOutput=$(testResultsDirectory)/coverage  --logger:"trx" --results-directory $(testResultsDirectory)'
+    arguments: '--configuration $(buildConfiguration) --collect:"Code Coverage" /t:rebuild /p:ContinuousIntegrationBuild=false /p:CollectCoverage=true "/p:CoverletOutputFormat=\"opencover,cobertura\"" /p:CoverletOutput=$(testResultsDirectory)/coverage  --logger:"trx" --results-directory $(testResultsDirectory)'
 
 - task: ResharperCli@2
   inputs:
