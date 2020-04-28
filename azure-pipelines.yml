@@ -40,7 +40,7 @@ steps:
     projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector 
     extraProperties: |
       sonar.resharper.cs.reportPath=$(Build.SourcesDirectory)/CodeQualityResults.xml
-      sonar.cs.opencover.reportsPaths=$(testResultsDirectory)/**/coverage.*.opencover.xml
+      sonar.cs.opencover.reportsPaths=$(testResultsDirectory)/coverage.*.opencover.xml
   
 - task: DotNetCoreCLI@2
   displayName: Build
