@@ -23,6 +23,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
             Action<Container, IMapperConfigurationExpression>? mapperConfigurationExpressionAction = null;
             Action action = () =>
             {
+                // ReSharper disable once AccessToDisposedClosure
                 container.AddAutoMapper(
                     cfg =>
                     {
