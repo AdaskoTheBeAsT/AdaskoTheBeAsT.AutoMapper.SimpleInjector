@@ -125,6 +125,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             return container;
         }
 
+        // ReSharper disable once RCS1224
         internal static void ConfigAction(
             Container c,
             IMapperConfigurationExpression cfg,

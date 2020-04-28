@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 using FluentAssertions;
 using SimpleInjector;
@@ -12,6 +13,28 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
         internal interface ISingletonService
         {
             Bar DoTheThing(Foo theObj);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenNullMapperConfigurationPassed()
+        {
+            // Arrange
+            using var container = new Container();
+            Action<Container, IMapperConfigurationExpression>? mapperConfigurationExpressionAction = null;
+            Action action = () =>
+            {
+                container.AddAutoMapper(
+                    cfg =>
+                    {
+                        cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests));
+#pragma warning disable 8604
+                        cfg.WithMapperConfigurationExpressionAction(mapperConfigurationExpressionAction);
+#pragma warning restore 8604
+                    });
+            };
+
+            // Act & Assert
+            action.Should().Throw<ArgumentNullException>();
         }
 
         [Fact]

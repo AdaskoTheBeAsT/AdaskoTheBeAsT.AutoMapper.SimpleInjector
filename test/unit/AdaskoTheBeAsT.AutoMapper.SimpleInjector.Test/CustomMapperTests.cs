@@ -43,6 +43,21 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenNullMapperInstanceProvided()
+        {
+            // Arrange
+            Func<IMapper>? instanceCreator = null;
+
+            Action action = () => _container.AddAutoMapper(
+#pragma warning disable 8604
+                cfg => cfg.Using(instanceCreator));
+#pragma warning restore 8604
+
+            // Act & Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
         public void ShouldResolveMapperWhenCustomMapperInstanceProvided()
         {
             // Arrange
