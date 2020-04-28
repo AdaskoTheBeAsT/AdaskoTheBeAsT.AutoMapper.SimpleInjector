@@ -84,6 +84,12 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
+- task: DeleteFiles@1
+  displayName: 'Clear coverage files'
+  inputs:
+    SourceFolder: '$(testResultsDirectory)'
+    Contents: '**/*.coverage'  
+
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
