@@ -40,7 +40,7 @@ steps:
     projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector 
     extraProperties: |
       sonar.resharper.cs.reportPath=$(Build.SourcesDirectory)/CodeQualityResults.xml
-      sonar.cs.opencover.reportsPaths=$(testResultsDirectory)/**/coverage.*.opencover.xml
+      sonar.cs.opencover.reportsPaths=$(testResultsDirectory)/coverage.net461.opencover.xml,$(testResultsDirectory)/coverage.netcoreapp3.1.opencover.xml
   
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -68,7 +68,7 @@ steps:
     command: test
     projects: '$(unitTestProjects)'
     publishTestResults: false
-    arguments: '--configuration $(buildConfiguration) /t:rebuild /p:ContinuousIntegrationBuild=false /p:CollectCoverage=true "/p:CoverletOutputFormat=\"opencover,cobertura\"" /p:CoverletOutput=$(testResultsDirectory)/coverage  --logger:"trx" --results-directory $(testResultsDirectory)'
+    arguments: '--configuration $(buildConfiguration) --collect:"Code Coverage" /t:rebuild /p:ContinuousIntegrationBuild=false /p:CollectCoverage=true "/p:CoverletOutputFormat=\"opencover,cobertura\"" /p:CoverletOutput=$(testResultsDirectory)/coverage  --logger:"trx" --results-directory $(testResultsDirectory)'
 
 - task: ResharperCli@2
   inputs:
@@ -83,6 +83,12 @@ steps:
   displayName: Sonar Cloud publish
   inputs:
     pollingTimeoutSec: '300'
+
+- task: DeleteFiles@1
+  displayName: 'Clear coverage files'
+  inputs:
+    SourceFolder: '$(testResultsDirectory)'
+    Contents: '**/*.coverage'  
 
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
@@ -99,7 +105,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: 'coverage.*.cobertura.xml'
+    summaryFileLocation: '$(testResultsDirectory)/coverage.*.cobertura.xml'
     reportDirectory: '$(testResultsDirectory)/coverage'
 
 - task: CopyFiles@2
