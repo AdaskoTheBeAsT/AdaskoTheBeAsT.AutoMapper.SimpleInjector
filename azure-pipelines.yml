@@ -99,7 +99,7 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: 'coverage.*.cobertura.xml'
+    summaryFileLocation: '$(testResultsDirectory)/coverage.*.cobertura.xml'
     reportDirectory: '$(testResultsDirectory)/coverage'
 
 - task: CopyFiles@2
