@@ -85,10 +85,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
             // act
             container.AddAutoMapper(
-                cfg =>
-                {
-                    cfg.AsTransient();
-                });
+                cfg => cfg.AsTransient());
             var serviceDescriptor = container.GetCurrentRegistrations()
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
@@ -110,10 +107,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
             // act
             container.AddAutoMapper(
-                cfg =>
-                {
-                    cfg.AsScoped();
-                });
+                cfg => cfg.AsScoped());
             var serviceDescriptor = container.GetCurrentRegistrations()
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
@@ -136,10 +130,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
             // act
             container.AddAutoMapper(
-                cfg =>
-                {
-                    cfg.AsSingleton();
-                });
+                cfg => cfg.AsSingleton());
             var serviceDescriptor = container.GetCurrentRegistrations()
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
