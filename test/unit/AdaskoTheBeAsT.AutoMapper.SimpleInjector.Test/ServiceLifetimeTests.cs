@@ -19,7 +19,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
 
             // act
-            container.AddAutoMapper(cfg => { });
+            container.AddAutoMapper(_ => { });
             var serviceDescriptor = container.GetCurrentRegistrations()
                 .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
 
