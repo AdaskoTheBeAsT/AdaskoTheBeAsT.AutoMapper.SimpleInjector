@@ -150,9 +150,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
                 {
                     IncludeGenericTypeDefinitions = true,
                     IncludeComposites = false,
-                });
+                }).ToList();
 
             container.Collection.Register(processorType, implementingTypes);
+            foreach (var implementingType in implementingTypes)
+            {
+                container.Register(implementingType);
+            }
         }
     }
 #pragma warning restore CS1574 // XML comment has cref attribute that could not be resolved

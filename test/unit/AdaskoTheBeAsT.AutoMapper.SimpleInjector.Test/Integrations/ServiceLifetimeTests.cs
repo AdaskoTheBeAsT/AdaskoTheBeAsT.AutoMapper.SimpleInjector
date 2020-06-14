@@ -44,6 +44,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
             // Arrange
             using var container = new Container();
             container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+            container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
             container.Register<ISingletonService, TestSingletonService>(Lifestyle.Singleton);
             container.AddAutoMapper(
                 cfg =>

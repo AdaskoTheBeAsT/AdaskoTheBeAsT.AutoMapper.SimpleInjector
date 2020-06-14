@@ -21,6 +21,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         public CustomMapperTests()
         {
             _container = new Container();
+            _container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
         }
 
         [Fact]

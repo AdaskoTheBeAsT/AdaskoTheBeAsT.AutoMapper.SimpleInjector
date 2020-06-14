@@ -14,6 +14,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         {
             using var container = new Container();
             container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+            container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
             container.AddAutoMapper(typeof(Source3));
 
             var mapper = container.GetInstance<IMapper>();

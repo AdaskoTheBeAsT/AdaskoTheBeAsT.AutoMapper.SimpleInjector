@@ -16,6 +16,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         {
             _container = new Container();
             _container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+            _container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
             _container.AddAutoMapper(typeof(AppDomainResolutionTests));
         }
 
