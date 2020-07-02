@@ -85,7 +85,8 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             _container.Dispose();
         }
 
-        internal class MyCustomMapper : IMapper
+        internal class MyCustomMapper
+            : IMapper
         {
             public MyCustomMapper()
             {
@@ -114,6 +115,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 throw new NotImplementedException();
             }
 
+            public TDestination Map<TDestination>(
+                object source,
+                Action<IMappingOperationOptions<object, TDestination>> opts)
+            {
+                throw new NotImplementedException();
+            }
+
             public TDestination Map<TSource, TDestination>(
                 TSource source,
                 Action<IMappingOperationOptions<TSource, TDestination>> opts)
@@ -132,6 +140,25 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 TSource source,
                 TDestination destination,
                 Action<IMappingOperationOptions<TSource, TDestination>> opts)
+            {
+                throw new NotImplementedException();
+            }
+
+            public object Map(
+                object source,
+                Type sourceType,
+                Type destinationType,
+                Action<IMappingOperationOptions<object, object>> opts)
+            {
+                throw new NotImplementedException();
+            }
+
+            public object Map(
+                object source,
+                object destination,
+                Type sourceType,
+                Type destinationType,
+                Action<IMappingOperationOptions<object, object>> opts)
             {
                 throw new NotImplementedException();
             }
@@ -183,6 +210,15 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             public IQueryable<TDestination> ProjectTo<TDestination>(
                 IQueryable source,
                 IDictionary<string, object> parameters,
+                params string[] membersToExpand)
+            {
+                throw new NotImplementedException();
+            }
+
+            public IQueryable ProjectTo(
+                IQueryable source,
+                Type destinationType,
+                IDictionary<string, object> parameters = null,
                 params string[] membersToExpand)
             {
                 throw new NotImplementedException();
