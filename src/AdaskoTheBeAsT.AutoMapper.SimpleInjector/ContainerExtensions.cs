@@ -100,7 +100,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             container.Register<IConfigurationProvider>(
                 () =>
                     new MapperConfiguration(
-                        cfg => ConfigAction(container, cfg, serviceConfig)),
+                        cfg => container.ConfigAction(cfg, serviceConfig)),
                 Lifestyle.Singleton);
 
             var customMapperInstance = serviceConfig.MapperInstanceCreator();
@@ -125,9 +125,8 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             return container;
         }
 
-        // ReSharper disable once RCS1224
         internal static void ConfigAction(
-            Container c,
+            this Container c,
             IMapperConfigurationExpression cfg,
             AutoMapperSimpleInjectorConfiguration serviceCfg)
         {
