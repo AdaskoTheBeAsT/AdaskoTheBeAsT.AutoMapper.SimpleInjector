@@ -85,7 +85,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             _container.Dispose();
         }
 
-        internal class MyCustomMapper
+        internal sealed class MyCustomMapper
             : IMapper
         {
             public MyCustomMapper()
@@ -100,40 +100,40 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 
             public TDestination Map<TDestination>(object source)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TDestination>(
                 object source,
                 Action<IMappingOperationOptions> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TSource, TDestination>(TSource source)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TDestination>(
                 object source,
                 Action<IMappingOperationOptions<object, TDestination>> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TSource, TDestination>(
                 TSource source,
                 Action<IMappingOperationOptions<TSource, TDestination>> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TSource, TDestination>(
                 TSource source,
                 TDestination destination)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public TDestination Map<TSource, TDestination>(
@@ -141,7 +141,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 TDestination destination,
                 Action<IMappingOperationOptions<TSource, TDestination>> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -150,7 +150,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type destinationType,
                 Action<IMappingOperationOptions<object, object>> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -160,7 +160,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type destinationType,
                 Action<IMappingOperationOptions<object, object>> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -168,7 +168,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type sourceType,
                 Type destinationType)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -177,7 +177,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type destinationType,
                 Action<IMappingOperationOptions> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -186,7 +186,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type sourceType,
                 Type destinationType)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public object Map(
@@ -196,7 +196,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 Type destinationType,
                 Action<IMappingOperationOptions> opts)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public IQueryable<TDestination> ProjectTo<TDestination>(
@@ -204,7 +204,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 object? parameters = null,
                 params Expression<Func<TDestination, object>>[] membersToExpand)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public IQueryable<TDestination> ProjectTo<TDestination>(
@@ -212,7 +212,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 IDictionary<string, object> parameters,
                 params string[] membersToExpand)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
 
             public IQueryable ProjectTo(
@@ -221,7 +221,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 IDictionary<string, object> parameters = null,
                 params string[] membersToExpand)
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
         }
     }

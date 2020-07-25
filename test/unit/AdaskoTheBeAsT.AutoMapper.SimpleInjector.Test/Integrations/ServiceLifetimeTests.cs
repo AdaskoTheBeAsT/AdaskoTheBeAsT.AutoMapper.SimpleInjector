@@ -8,7 +8,7 @@ using Xunit;
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
 {
 #pragma warning disable CA1812
-    public class ServiceLifetimeTests
+    public sealed class ServiceLifetimeTests
     {
         internal interface ISingletonService
         {
@@ -69,7 +69,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
             actual.TheValue.Should().Be(1);
         }
 
-        internal class TestSingletonService : ISingletonService
+        internal sealed class TestSingletonService : ISingletonService
         {
             private readonly IMapper _mapper;
 
@@ -85,13 +85,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
             }
         }
 
-        internal class Foo
+        internal sealed class Foo
         {
             // ReSharper disable once UnusedAutoPropertyAccessor.Global
             public int TheValue { get; set; }
         }
 
-        internal class Bar
+        internal sealed class Bar
         {
             // ReSharper disable once UnusedAutoPropertyAccessor.Global
             public int TheValue { get; set; }

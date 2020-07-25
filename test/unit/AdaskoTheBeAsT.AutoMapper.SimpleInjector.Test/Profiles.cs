@@ -7,6 +7,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
 #pragma warning disable SA1649 // File name should match first type name
 #pragma warning disable SA1202 // Elements should be ordered by access
 #pragma warning disable CA1812
+#pragma warning disable MA0048 // File name must match type name
     public class Source
     {
     }
@@ -54,7 +55,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
     {
     }
 
-    internal class Profile2 : Profile
+    internal sealed class Profile2 : Profile
     {
         public Profile2()
         {
@@ -103,7 +104,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         public int Modify(int value) => value + _value;
     }
 
-    internal class FooMappingAction : IMappingAction<object, object>
+    internal sealed class FooMappingAction : IMappingAction<object, object>
     {
         public void Process(
             object source,
@@ -114,7 +115,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
     }
 
-    internal class FooValueResolver : IValueResolver<object, object, object>
+    internal sealed class FooValueResolver : IValueResolver<object, object, object>
     {
         public object Resolve(object source, object destination, object destMember, ResolutionContext context)
         {
@@ -124,7 +125,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
     }
 
-    internal class FooMemberValueResolver : IMemberValueResolver<object, object, object, object>
+    internal sealed class FooMemberValueResolver : IMemberValueResolver<object, object, object, object>
     {
         public object Resolve(object source, object destination, object sourceMember, object destMember, ResolutionContext context)
         {
@@ -134,7 +135,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
     }
 
-    internal class FooTypeConverter : ITypeConverter<object, object>
+    internal sealed class FooTypeConverter : ITypeConverter<object, object>
     {
         public object Convert(object source, object destination, ResolutionContext context)
         {
@@ -144,13 +145,13 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
     }
 
-    internal class FooValueConverter : IValueConverter<int, int>
+    internal sealed class FooValueConverter : IValueConverter<int, int>
     {
         public int Convert(int sourceMember, ResolutionContext context)
             => sourceMember + 1;
     }
 
-    internal class DependencyValueConverter : IValueConverter<int, int>
+    internal sealed class DependencyValueConverter : IValueConverter<int, int>
     {
         private readonly ISomeService _service;
 
@@ -159,6 +160,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         public int Convert(int sourceMember, ResolutionContext context)
             => _service.Modify(sourceMember);
     }
+#pragma warning restore MA0048 // File name must match type name
 #pragma warning restore CA1812
 #pragma warning restore SA1202 // Elements should be ordered by access
 #pragma warning restore SA1649 // File name should match first type name
