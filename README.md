@@ -12,6 +12,7 @@ AutoMapper extensions for SimpleInjector
 ![Sonar Test Execution Time](https://img.shields.io/sonar/test_execution_time/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io)
 ![Sonar Coverage](https://img.shields.io/sonar/coverage/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io&style=plastic)
 ![Nuget](https://img.shields.io/nuget/dt/AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector?ref=badge_shield)
 
 ## Usage
 
@@ -183,3 +184,6 @@ var orders = await dbContext.Orders
 - Steven van Deursen for SimpleInjector
 
 Code originates from AutoMapper.Extensions.Microsoft.DependencyInjection and was changed to work with SimpleInjector.
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector?ref=badge_large)
