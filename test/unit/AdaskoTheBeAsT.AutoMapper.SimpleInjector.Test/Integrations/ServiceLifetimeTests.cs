@@ -20,7 +20,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
         {
             // Arrange
             using var container = new Container();
-            Action<Container, IMapperConfigurationExpression>? mapperConfigurationExpressionAction = null;
+            const Action<Container, IMapperConfigurationExpression>? mapperConfigurationExpressionAction = null;
             Action action = () =>
             {
                 // ReSharper disable once AccessToDisposedClosure
@@ -29,7 +29,9 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
                     {
                         cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests));
 #pragma warning disable 8604
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                         cfg.WithMapperConfigurationExpressionAction(mapperConfigurationExpressionAction);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning restore 8604
                     });
             };
