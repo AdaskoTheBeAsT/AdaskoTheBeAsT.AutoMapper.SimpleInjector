@@ -22,6 +22,19 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenNullContainerPassed()
+        {
+            // Arrange
+            var container = default(Container);
+#pragma warning disable 8604
+            Action action = () => ContainerExtensions.AddAutoMapper(container, _ => { });
+#pragma warning restore 8604
+
+            // Act & Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
         public void ShouldResolveWithDependency()
         {
             var mapper = _container.GetInstance<IMapper>();

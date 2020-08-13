@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +87,11 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             this Container container,
             Action<AutoMapperSimpleInjectorConfiguration>? configuration)
         {
+            if (container is null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
             var serviceConfig = new AutoMapperSimpleInjectorConfiguration();
             configuration?.Invoke(serviceConfig);
 
