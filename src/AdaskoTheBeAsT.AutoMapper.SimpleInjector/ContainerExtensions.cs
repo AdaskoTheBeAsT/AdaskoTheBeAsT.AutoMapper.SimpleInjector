@@ -136,7 +136,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector
             IMapperConfigurationExpression cfg,
             AutoMapperSimpleInjectorConfiguration serviceCfg)
         {
-            serviceCfg.MapperConfigurationExpressionAction?.Invoke(
+            serviceCfg.MapperConfigurationExpressionAction.Invoke(
                 c,
                 cfg);
             cfg.ConstructServicesUsing(c.GetInstance);
