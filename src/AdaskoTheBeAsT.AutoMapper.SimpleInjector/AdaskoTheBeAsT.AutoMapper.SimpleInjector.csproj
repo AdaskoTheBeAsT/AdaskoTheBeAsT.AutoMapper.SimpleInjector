@@ -10,7 +10,7 @@
     <RepositoryType>github</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Description>AutoMapper extensions for SimpleInjector</Description>
-    <PackageVersion>3.0.2</PackageVersion>
+    <PackageVersion>3.1.0</PackageVersion>
     <Authors>Adam "AdaskoTheBeAsT" Pluciński</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>
@@ -25,8 +25,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.0.0" />
-    <PackageReference Include="SimpleInjector" Version="5.0.3" />
+    <PackageReference Include="AutoMapper" Version="10.1.0" />
+    <PackageReference Include="SimpleInjector" Version="5.0.4" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
