@@ -4,7 +4,7 @@
   <PropertyGroup>
     <!-- Common ruleset shared by all projects -->
     <CodeAnalysisRuleset>$(MSBuildThisFileDirectory)AdaskoTheBeAsT.ruleset</CodeAnalysisRuleset>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <WarningsAsErrors />
@@ -32,25 +32,25 @@
     <PackageReference Include="Meziantou.Analyzer" Version="1.0.570" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.0" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.7.0" >
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="3.8.0-4.final" >
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0" >

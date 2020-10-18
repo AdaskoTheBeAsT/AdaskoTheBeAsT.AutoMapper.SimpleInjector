@@ -94,9 +94,9 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 ServiceCtor = null;
             }
 
-            public IConfigurationProvider ConfigurationProvider { get; }
+            public IConfigurationProvider? ConfigurationProvider { get; }
 
-            public Func<Type, object> ServiceCtor { get; }
+            public Func<Type, object>? ServiceCtor { get; }
 
             public TDestination Map<TDestination>(object source)
             {
@@ -218,7 +218,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             public IQueryable ProjectTo(
                 IQueryable source,
                 Type destinationType,
-                IDictionary<string, object> parameters = null,
+                IDictionary<string, object>? parameters = null,
                 params string[] membersToExpand)
             {
                 throw new NotSupportedException();
