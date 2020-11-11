@@ -50,9 +50,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             const Func<IMapper>? instanceCreator = null;
 
             Action action = () => _container.AddAutoMapper(
-#pragma warning disable 8604
                 cfg => cfg.Using(instanceCreator));
-#pragma warning restore 8604
 
             // Act & Assert
             action.Should().Throw<ArgumentNullException>();
@@ -94,9 +92,9 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 ServiceCtor = null;
             }
 
-            public IConfigurationProvider ConfigurationProvider { get; }
+            public IConfigurationProvider? ConfigurationProvider { get; }
 
-            public Func<Type, object> ServiceCtor { get; }
+            public Func<Type, object>? ServiceCtor { get; }
 
             public TDestination Map<TDestination>(object source)
             {
@@ -215,6 +213,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 throw new NotSupportedException();
             }
 
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
             public IQueryable ProjectTo(
                 IQueryable source,
                 Type destinationType,
@@ -223,6 +222,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
             {
                 throw new NotSupportedException();
             }
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
         }
     }
 #pragma warning restore CA1812

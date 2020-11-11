@@ -29,7 +29,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+                serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
             }
         }
 
@@ -51,7 +51,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+                serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
             }
         }
 
@@ -73,7 +73,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+                serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
             }
         }
 
@@ -95,7 +95,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Transient);
+                serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Transient);
             }
         }
 
@@ -117,7 +117,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Name.Should().Be("Thread Scoped");
+                serviceDescriptor!.Lifestyle.Name.Should().Be("Thread Scoped");
             }
         }
 
@@ -140,7 +140,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
                 serviceDescriptor.Should().NotBeNull();
 
                 // ReSharper disable once PossibleNullReferenceException
-                serviceDescriptor.Lifestyle.Should().Be(Lifestyle.Singleton);
+                serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
             }
         }
     }
