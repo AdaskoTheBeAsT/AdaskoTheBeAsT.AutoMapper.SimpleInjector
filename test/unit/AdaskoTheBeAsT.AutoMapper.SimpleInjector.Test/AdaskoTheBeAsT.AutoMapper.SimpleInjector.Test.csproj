@@ -9,10 +9,4 @@
     <ProjectReference Include="..\..\..\src\AdaskoTheBeAsT.AutoMapper.SimpleInjector\AdaskoTheBeAsT.AutoMapper.SimpleInjector.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="xunit.runner.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
