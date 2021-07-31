@@ -55,16 +55,6 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
     {
     }
 
-    internal sealed class Profile2 : Profile
-    {
-        public Profile2()
-        {
-            CreateMap<Source2, Dest2>()
-                .ForMember(d => d.ResolvedValue, opt => opt.MapFrom<DependencyResolver>())
-                .ForMember(d => d.ConvertedValue, opt => opt.ConvertUsing<DependencyValueConverter, int>());
-        }
-    }
-
     public class DependencyResolver : IValueResolver<object, object, int>
     {
         private readonly ISomeService _service;
@@ -102,6 +92,16 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
         }
 
         public int Modify(int value) => value + _value;
+    }
+
+    internal sealed class Profile2 : Profile
+    {
+        public Profile2()
+        {
+            CreateMap<Source2, Dest2>()
+                .ForMember(d => d.ResolvedValue, opt => opt.MapFrom<DependencyResolver>())
+                .ForMember(d => d.ConvertedValue, opt => opt.ConvertUsing<DependencyValueConverter, int>());
+        }
     }
 
     internal sealed class FooMappingAction : IMappingAction<object, object>
