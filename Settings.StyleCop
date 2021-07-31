@@ -256,7 +256,7 @@
       <AnalyzerSettings />
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.NamingRules">
-      <Rule Name="FieldNamesMustNotBeginWithUnderscore">
+      <Rule Name="SA1309:FieldNamesMustNotBeginWithUnderscore">
         <RuleSettings>
           <BooleanProperty Name="Enabled">False</BooleanProperty>
         </RuleSettings>
