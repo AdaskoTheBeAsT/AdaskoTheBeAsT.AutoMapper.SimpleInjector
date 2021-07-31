@@ -51,10 +51,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations
                 cfg =>
                 {
                     cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests));
-                    cfg.WithMapperConfigurationExpressionAction(
-                        (
-                            _,
-                            expression) => expression.CreateMap<Foo, Bar>().ReverseMap());
+                    cfg.WithMapperConfigurationExpressionAction((_, expression) => expression.CreateMap<Foo, Bar>().ReverseMap());
                 });
             Bar actual;
 
