@@ -3,6 +3,7 @@
 AutoMapper extensions for SimpleInjector
 
 ## Badges
+[![CodeFactor](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector/badge)](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector)
 [![Build Status](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_apis/build/status/AdaskoTheBeAsT.AdaskoTheBeAsT.AutoMapper.SimpleInjector?branchName=master)](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_build/latest?definitionId=8&branchName=master)
 ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16?style=plastic)
