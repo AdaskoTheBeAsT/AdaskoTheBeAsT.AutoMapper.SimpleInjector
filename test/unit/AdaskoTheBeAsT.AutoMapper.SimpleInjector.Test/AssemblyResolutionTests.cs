@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
 using FluentAssertions;
 using SimpleInjector;

@@ -1,3 +1,4 @@
+using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
 using FluentAssertions;
 using SimpleInjector;
