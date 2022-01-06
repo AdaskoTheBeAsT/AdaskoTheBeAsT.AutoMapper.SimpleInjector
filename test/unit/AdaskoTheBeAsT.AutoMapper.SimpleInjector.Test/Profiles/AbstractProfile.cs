@@ -1,8 +1,7 @@
 using AutoMapper;
 
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
+
+public abstract class AbstractProfile : Profile
 {
-    public abstract class AbstractProfile : Profile
-    {
-    }
 }

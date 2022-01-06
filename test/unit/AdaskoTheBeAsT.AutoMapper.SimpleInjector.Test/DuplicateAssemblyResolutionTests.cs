@@ -5,31 +5,30 @@ using FluentAssertions;
 using SimpleInjector;
 using Xunit;
 
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test;
+
+public sealed class DuplicateAssemblyResolutionTests
+    : IDisposable
 {
-    public sealed class DuplicateAssemblyResolutionTests
-        : IDisposable
+    private readonly Container _container;
+
+    public DuplicateAssemblyResolutionTests()
     {
-        private readonly Container _container;
+        _container = new Container();
+        _container.AddAutoMapper(typeof(IMapper), typeof(IMapper));
+    }
 
-        public DuplicateAssemblyResolutionTests()
-        {
-            _container = new Container();
-            _container.AddAutoMapper(typeof(IMapper), typeof(IMapper));
-        }
+    [Fact]
+    public void ShouldResolveNotificationHandlersOnlyOnce()
+    {
+        _container.GetCurrentRegistrations()
+            .Where(c => c.ServiceType == typeof(IMapper))
+            .Should()
+            .HaveCount(1);
+    }
 
-        [Fact]
-        public void ShouldResolveNotificationHandlersOnlyOnce()
-        {
-            _container.GetCurrentRegistrations()
-                .Where(c => c.ServiceType == typeof(IMapper))
-                .Should()
-                .HaveCount(1);
-        }
-
-        public void Dispose()
-        {
-            _container.Dispose();
-        }
+    public void Dispose()
+    {
+        _container.Dispose();
     }
 }

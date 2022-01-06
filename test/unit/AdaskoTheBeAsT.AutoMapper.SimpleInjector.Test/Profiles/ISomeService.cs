@@ -1,7 +1,6 @@
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
+
+public interface ISomeService
 {
-    public interface ISomeService
-    {
-        int Modify(int value);
-    }
+    int Modify(int value);
 }

@@ -1,6 +1,5 @@
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
+
+public class Dest
 {
-    public class Dest
-    {
-    }
 }

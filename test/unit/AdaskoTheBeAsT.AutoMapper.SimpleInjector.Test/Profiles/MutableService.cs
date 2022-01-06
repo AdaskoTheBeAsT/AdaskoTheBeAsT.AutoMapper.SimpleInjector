@@ -1,9 +1,8 @@
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles
-{
-    public class MutableService : ISomeService
-    {
-        public int Value { get; set; }
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 
-        public int Modify(int value) => value + Value;
-    }
+public class MutableService : ISomeService
+{
+    public int Value { get; set; }
+
+    public int Modify(int value) => value + Value;
 }

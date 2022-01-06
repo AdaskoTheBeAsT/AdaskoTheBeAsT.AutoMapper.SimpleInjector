@@ -1,15 +1,14 @@
 using AutoMapper;
 
-namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles
+namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
+
+internal sealed class FooMappingAction : IMappingAction<object, object>
 {
-    internal sealed class FooMappingAction : IMappingAction<object, object>
+    public void Process(
+        object source,
+        object destination,
+        ResolutionContext context)
     {
-        public void Process(
-            object source,
-            object destination,
-            ResolutionContext context)
-        {
-            // no op
-        }
+        // no op
     }
 }
