@@ -95,6 +95,7 @@ public sealed class CustomMapperTests
 
         public IConfigurationProvider? ConfigurationProvider { get; }
 
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public Func<Type, object>? ServiceCtor { get; }
 
         public TDestination Map<TDestination>(object source)
