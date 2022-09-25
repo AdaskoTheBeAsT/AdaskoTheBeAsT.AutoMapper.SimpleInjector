@@ -1,4 +1,4 @@
-using System.Linq;
+using System;
 using System.Reflection;
 using AutoMapper;
 using FluentAssertions;
@@ -20,8 +20,9 @@ public class ServiceLifetimeTests
 
         // act
         container.AddAutoMapper(_ => { });
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())
@@ -42,8 +43,9 @@ public class ServiceLifetimeTests
 
         // act
         container.AddAutoMapper(typeof(ServiceLifetimeTests));
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())
@@ -64,8 +66,9 @@ public class ServiceLifetimeTests
 
         // act
         container.AddAutoMapper(typeof(ServiceLifetimeTests).GetTypeInfo().Assembly);
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())
@@ -86,8 +89,9 @@ public class ServiceLifetimeTests
         // act
         container.AddAutoMapper(
             cfg => cfg.AsTransient());
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())
@@ -108,8 +112,9 @@ public class ServiceLifetimeTests
         // act
         container.AddAutoMapper(
             cfg => cfg.AsScoped());
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())
@@ -131,8 +136,9 @@ public class ServiceLifetimeTests
         // act
         container.AddAutoMapper(
             cfg => cfg.AsSingleton());
-        var serviceDescriptor = container.GetCurrentRegistrations()
-            .FirstOrDefault(r => r.ServiceType == typeof(IMapper));
+        var serviceDescriptor = Array.Find(
+            container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IMapper));
 
         // assert
         using (new AssertionScope())

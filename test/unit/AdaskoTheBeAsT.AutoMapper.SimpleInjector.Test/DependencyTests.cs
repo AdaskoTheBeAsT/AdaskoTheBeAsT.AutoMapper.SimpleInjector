@@ -26,12 +26,16 @@ public sealed class DependencyTests
     public void ShouldThrowExceptionWhenNullContainerPassed()
     {
         // Arrange
-        var container = default(Container);
+        const Container? container = null;
 #pragma warning disable 8604
-        Action action = () => ContainerExtensions.AddAutoMapper(container, _ => { });
+
+        // ReSharper disable once InvokeAsExtensionMethod
+#pragma warning disable CC0026 // Call Extension Method As Extension
+        Action action = () => ContainerExtensions.AddAutoMapper(container!, _ => { });
+#pragma warning restore CC0026 // Call Extension Method As Extension
 #pragma warning restore 8604
 
-        // Act & Assert
+        // Act and Assert
         action.Should().Throw<ArgumentNullException>();
     }
 

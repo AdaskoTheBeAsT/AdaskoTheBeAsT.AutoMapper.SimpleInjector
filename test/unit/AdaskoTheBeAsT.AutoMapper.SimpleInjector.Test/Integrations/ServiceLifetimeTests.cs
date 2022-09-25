@@ -11,7 +11,7 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations;
 #pragma warning disable CA1812
 public sealed class ServiceLifetimeTests
 {
-    internal interface ISingletonService
+    private interface ISingletonService
     {
         Bar DoTheThing(Foo theObj);
     }
@@ -35,7 +35,7 @@ public sealed class ServiceLifetimeTests
                 });
         };
 
-        // Act & Assert
+        // Act and Assert
         action.Should().Throw<ArgumentNullException>();
     }
 
@@ -78,8 +78,7 @@ public sealed class ServiceLifetimeTests
 
         public Bar DoTheThing(Foo theObj)
         {
-            var bar = _mapper.Map<Bar>(theObj);
-            return bar;
+            return _mapper.Map<Bar>(theObj);
         }
     }
 

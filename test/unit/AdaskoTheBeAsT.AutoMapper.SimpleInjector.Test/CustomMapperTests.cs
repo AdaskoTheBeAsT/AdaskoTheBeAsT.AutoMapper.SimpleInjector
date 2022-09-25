@@ -28,7 +28,7 @@ public sealed class CustomMapperTests
     [Fact]
     public void ShouldResolveMapperWhenCustomMapperTypeProvided()
     {
-        // Arrange & Act
+        // Arrange and Act
         _container.AddAutoMapper(
             cfg =>
             {
@@ -53,7 +53,7 @@ public sealed class CustomMapperTests
         Action action = () => _container.AddAutoMapper(
             cfg => cfg.Using(instanceCreator));
 
-        // Act & Assert
+        // Act and Assert
         action.Should().Throw<ArgumentNullException>();
     }
 
@@ -98,131 +98,97 @@ public sealed class CustomMapperTests
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public Func<Type, object>? ServiceCtor { get; }
 
-        public TDestination Map<TDestination>(object source)
-        {
-            throw new NotSupportedException();
-        }
+        public TDestination Map<TDestination>(object source) => throw new NotSupportedException();
 
         public TDestination Map<TDestination>(
             object source,
-            Action<IMappingOperationOptions> opts)
-        {
+            Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-        }
 
-        public TDestination Map<TSource, TDestination>(TSource source)
-        {
-            throw new NotSupportedException();
-        }
+        public TDestination Map<TSource, TDestination>(TSource source) => throw new NotSupportedException();
 
         public TDestination Map<TDestination>(
             object source,
-            Action<IMappingOperationOptions<object, TDestination>> opts)
-        {
+            Action<IMappingOperationOptions<object, TDestination>> opts) =>
             throw new NotSupportedException();
-        }
 
         public TDestination Map<TSource, TDestination>(
             TSource source,
-            Action<IMappingOperationOptions<TSource, TDestination>> opts)
-        {
+            Action<IMappingOperationOptions<TSource, TDestination>> opts) =>
             throw new NotSupportedException();
-        }
 
         public TDestination Map<TSource, TDestination>(
             TSource source,
-            TDestination destination)
-        {
+            TDestination destination) =>
             throw new NotSupportedException();
-        }
 
         public TDestination Map<TSource, TDestination>(
             TSource source,
             TDestination destination,
-            Action<IMappingOperationOptions<TSource, TDestination>> opts)
-        {
+            Action<IMappingOperationOptions<TSource, TDestination>> opts) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             Type sourceType,
             Type destinationType,
-            Action<IMappingOperationOptions<object, object>> opts)
-        {
+            Action<IMappingOperationOptions<object, object>> opts) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             object destination,
             Type sourceType,
             Type destinationType,
-            Action<IMappingOperationOptions<object, object>> opts)
-        {
+            Action<IMappingOperationOptions<object, object>> opts) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             Type sourceType,
-            Type destinationType)
-        {
+            Type destinationType) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             Type sourceType,
             Type destinationType,
-            Action<IMappingOperationOptions> opts)
-        {
+            Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             object destination,
             Type sourceType,
-            Type destinationType)
-        {
+            Type destinationType) =>
             throw new NotSupportedException();
-        }
 
         public object Map(
             object source,
             object destination,
             Type sourceType,
             Type destinationType,
-            Action<IMappingOperationOptions> opts)
-        {
+            Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-        }
 
         public IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
             object? parameters = null,
-            params Expression<Func<TDestination, object>>[] membersToExpand)
-        {
+            params Expression<Func<TDestination, object>>[] membersToExpand) =>
             throw new NotSupportedException();
-        }
 
         public IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
             IDictionary<string, object> parameters,
-            params string[] membersToExpand)
-        {
+            params string[] membersToExpand) =>
             throw new NotSupportedException();
-        }
 
         public IQueryable ProjectTo(
             IQueryable source,
             Type destinationType,
             IDictionary<string, object> parameters = null,
-            params string[] membersToExpand)
-        {
+            params string[] membersToExpand) =>
             throw new NotSupportedException();
-        }
     }
 }
 #pragma warning restore CA1812
