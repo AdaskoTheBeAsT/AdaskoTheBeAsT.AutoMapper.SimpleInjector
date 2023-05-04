@@ -5,8 +5,7 @@ AutoMapper extensions for SimpleInjector
 ## Badges
 
 [![CodeFactor](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector/badge)](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/alerts/)
-[![Build Status](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_apis/build/status/AdaskoTheBeAsT.AdaskoTheBeAsT.AutoMapper.SimpleInjector?branchName=master)](https://adaskothebeast.visualstudio.com/AdaskoTheBeAsT.AutoMapper.SimpleInjector/_build/latest?definitionId=8&branchName=master)
+[![Build Status](https://img.shields.io/azure-devops/build/adaskothebeast/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)](https://img.shields.io/azure-devops/build/adaskothebeast/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)
 ![Azure DevOps tests](https://img.shields.io/azure-devops/tests/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16?style=plastic)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=alert_status)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
