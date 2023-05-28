@@ -35,7 +35,7 @@ steps:
     displayName: Restore
     inputs:
       command: restore
-      arguments: AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln
+      arguments: AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln  --verbosity quiet
 
   - task: SonarCloudPrepare@1
     displayName: "Prepare analysis on SonarCloud"
