@@ -118,11 +118,9 @@ steps:
       reports: "$(testResultsDirectory)/**/coverage.cobertura.xml"
       targetdir: "$(testResultsDirectory)/coverage"
 
-  - task: PublishCodeCoverageResults@1
+  - task: PublishCodeCoverageResults@2
     inputs:
-      codeCoverageTool: "Cobertura"
       summaryFileLocation: "$(testResultsDirectory)/**/coverage.cobertura.xml"
-      reportDirectory: "$(testResultsDirectory)/coverage"
 
   - task: CopyFiles@2
     displayName: "Copy nuget packages"
