@@ -46,8 +46,8 @@ steps:
       arguments: AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln
 
   - script: dotnet build AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln --configuration $(buildConfiguration) -v diag -bl:$(Build.ArtifactStagingDirectory)/msbuild.binlog
-      displayName: 'Build with MSBuild binary log'
-      continueOnError: true # This ensures that the pipeline continues even if the build fails
+    displayName: 'Build with MSBuild binary log'
+    continueOnError: true # This ensures that the pipeline continues even if the build fails
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Binary Log'
