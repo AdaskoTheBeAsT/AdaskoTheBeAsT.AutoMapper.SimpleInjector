@@ -24,7 +24,7 @@ public sealed class DuplicateAssemblyResolutionTests
         _container.GetCurrentRegistrations()
             .Where(c => c.ServiceType == typeof(IMapper))
             .Should()
-            .HaveCount(1);
+            .ContainSingle();
     }
 
     public void Dispose()
