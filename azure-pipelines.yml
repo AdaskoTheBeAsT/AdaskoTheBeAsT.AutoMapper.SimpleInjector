@@ -54,12 +54,13 @@ steps:
       projectKey: "AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector"
       projectName: AdaskoTheBeAsT.AutoMapper.SimpleInjector
       extraProperties: |
+        sonar.working.directory=$(Build.ArtifactStagingDirectory)/.sonar
         sonar.resharper.cs.reportPath=$(Build.SourcesDirectory)/CodeQualityResults.xml
 
   - task: DotNetCoreCLI@2
     displayName: Build
     inputs:
-      arguments: "AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln --configuration $(buildConfiguration)"
+      arguments: "AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln --configuration $(buildConfiguration) --no-restore"
 
   - task: CopyFiles@2
     displayName: "Copy nuget packages"
@@ -82,12 +83,21 @@ steps:
       command: test
       projects: "$(unitTestProjects)"
       publishTestResults: false
-      arguments: '--configuration $(buildConfiguration) --collect:"Code Coverage" --collect:"XPlat Code Coverage;Format=opencover,cobertura" --logger:"trx" --results-directory $(testResultsDirectory)'
+      arguments: >-
+        --configuration $(buildConfiguration)
+        --collect:"Code Coverage"
+        --collect:"XPlat Code Coverage"
+        --logger:"trx"
+        --results-directory $(testResultsDirectory)
+        --no-build
+        --no-restore
+        --settings $(Build.SourcesDirectory)/.runsettings
+        /p:RunCodeAnalysis=false
 
   - task: ResharperCli@2
     inputs:
       solutionOrProjectPath: "AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln"
-      resharperNuGetVersion: "2023.2.3"
+      resharperNuGetVersion: "2023.3.3"
       failBuildLevelSelector: "Warning"
       resultsOutputFilePath: "$(Build.SourcesDirectory)/CodeQualityResults.xml"
       additionalArguments: "--no-build"
@@ -111,6 +121,7 @@ steps:
     inputs:
       testResultsFormat: "VSTest"
       testResultsFiles: "*.trx"
+      mergeTestResults: true
       searchFolder: "$(testResultsDirectory)"
 
   - task: reportgenerator@5
