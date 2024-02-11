@@ -87,18 +87,20 @@ public sealed class CustomMapperTests
     internal sealed class MyCustomMapper
         : IMapper
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public MyCustomMapper()
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             ConfigurationProvider = null;
             ServiceCtor = null;
         }
 
-        public IConfigurationProvider? ConfigurationProvider { get; }
+        public IConfigurationProvider ConfigurationProvider { get; }
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public Func<Type, object>? ServiceCtor { get; }
 
-        public TDestination Map<TDestination>(object source) => throw new NotSupportedException();
+        public TDestination? Map<TDestination>(object? source) => throw new NotSupportedException();
 
 #pragma warning disable MA0038 // Make method static
         public TDestination Map<TDestination>(
@@ -107,47 +109,47 @@ public sealed class CustomMapperTests
             throw new NotSupportedException();
 #pragma warning restore MA0038 // Make method static
 
-        public TDestination Map<TSource, TDestination>(TSource source) => throw new NotSupportedException();
+        public TDestination? Map<TSource, TDestination>(TSource? source) => throw new NotSupportedException();
 
         public TDestination Map<TDestination>(
-            object source,
+            object? source,
             Action<IMappingOperationOptions<object, TDestination>> opts) =>
             throw new NotSupportedException();
 
         public TDestination Map<TSource, TDestination>(
-            TSource source,
+            TSource? source,
             Action<IMappingOperationOptions<TSource, TDestination>> opts) =>
             throw new NotSupportedException();
 
         public TDestination Map<TSource, TDestination>(
-            TSource source,
-            TDestination destination) =>
+            TSource? source,
+            TDestination? destination) =>
             throw new NotSupportedException();
 
         public TDestination Map<TSource, TDestination>(
-            TSource source,
-            TDestination destination,
+            TSource? source,
+            TDestination? destination,
             Action<IMappingOperationOptions<TSource, TDestination>> opts) =>
             throw new NotSupportedException();
 
         public object Map(
-            object source,
-            Type sourceType,
+            object? source,
+            Type? sourceType,
             Type destinationType,
             Action<IMappingOperationOptions<object, object>> opts) =>
             throw new NotSupportedException();
 
         public object Map(
-            object source,
-            object destination,
-            Type sourceType,
-            Type destinationType,
+            object? source,
+            object? destination,
+            Type? sourceType,
+            Type? destinationType,
             Action<IMappingOperationOptions<object, object>> opts) =>
             throw new NotSupportedException();
 
         public object Map(
-            object source,
-            Type sourceType,
+            object? source,
+            Type? sourceType,
             Type destinationType) =>
             throw new NotSupportedException();
 
@@ -161,10 +163,10 @@ public sealed class CustomMapperTests
 #pragma warning restore MA0038 // Make method static
 
         public object Map(
-            object source,
-            object destination,
-            Type sourceType,
-            Type destinationType) =>
+            object? source,
+            object? destination,
+            Type? sourceType,
+            Type? destinationType) =>
             throw new NotSupportedException();
 
 #pragma warning disable MA0038 // Make method static
@@ -185,14 +187,14 @@ public sealed class CustomMapperTests
 
         public IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
-            IDictionary<string, object> parameters,
+            IDictionary<string, object>? parameters,
             params string[] membersToExpand) =>
             throw new NotSupportedException();
 
         public IQueryable ProjectTo(
             IQueryable source,
             Type destinationType,
-            IDictionary<string, object> parameters = null,
+            IDictionary<string, object>? parameters = null,
             params string[] membersToExpand) =>
             throw new NotSupportedException();
     }

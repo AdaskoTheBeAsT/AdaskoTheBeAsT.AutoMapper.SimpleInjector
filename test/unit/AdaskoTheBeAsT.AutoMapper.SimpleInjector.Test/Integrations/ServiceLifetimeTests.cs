@@ -13,7 +13,7 @@ public sealed class ServiceLifetimeTests
 {
     private interface ISingletonService
     {
-        Bar DoTheThing(Foo theObj);
+        Bar? DoTheThing(Foo theObj);
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public sealed class ServiceLifetimeTests
                 cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests));
                 cfg.WithMapperConfigurationExpressionAction((_, expression) => expression.CreateMap<Foo, Bar>().ReverseMap());
             });
-        Bar actual;
+        Bar? actual;
 
         // Act
         using (ThreadScopedLifestyle.BeginScope(container))
@@ -64,7 +64,7 @@ public sealed class ServiceLifetimeTests
 
         // Assert
         actual.Should().NotBeNull();
-        actual.TheValue.Should().Be(1);
+        actual?.TheValue.Should().Be(1);
     }
 
     internal sealed class TestSingletonService : ISingletonService
@@ -76,7 +76,7 @@ public sealed class ServiceLifetimeTests
             _mapper = mapper;
         }
 
-        public Bar DoTheThing(Foo theObj)
+        public Bar? DoTheThing(Foo theObj)
         {
             return _mapper.Map<Bar>(theObj);
         }
