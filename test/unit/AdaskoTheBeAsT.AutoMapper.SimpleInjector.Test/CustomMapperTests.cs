@@ -100,7 +100,7 @@ public sealed class CustomMapperTests
         // ReSharper disable once UnusedAutoPropertyAccessor.Global
         public Func<Type, object>? ServiceCtor { get; }
 
-        public TDestination? Map<TDestination>(object? source) => throw new NotSupportedException();
+        public TDestination Map<TDestination>(object? source) => throw new NotSupportedException();
 
 #pragma warning disable MA0038 // Make method static
         public TDestination Map<TDestination>(
@@ -109,7 +109,7 @@ public sealed class CustomMapperTests
             throw new NotSupportedException();
 #pragma warning restore MA0038 // Make method static
 
-        public TDestination? Map<TSource, TDestination>(TSource? source) => throw new NotSupportedException();
+        public TDestination Map<TSource, TDestination>(TSource? source) => throw new NotSupportedException();
 
         public TDestination Map<TDestination>(
             object? source,
