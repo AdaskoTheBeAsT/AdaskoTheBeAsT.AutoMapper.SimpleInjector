@@ -352,3 +352,11 @@ MigrationBackup/
 
 # JetBrains Rider cache/options directory
 .idea/
+
+NDependOut/
+
+.sarif/*
+!.sarif/.gitkeep
+
+.dotcover/*
+!.dotcover/.gitkeep

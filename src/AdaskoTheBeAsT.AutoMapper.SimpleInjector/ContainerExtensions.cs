@@ -86,10 +86,7 @@ public static class ContainerExtensions
         this Container container,
         Action<AutoMapperSimpleInjectorConfiguration>? configuration)
     {
-        if (container is null)
-        {
-            throw new ArgumentNullException(nameof(container));
-        }
+        ArgumentNullException.ThrowIfNull(container);
 
         var serviceConfig = new AutoMapperSimpleInjectorConfiguration();
         configuration?.Invoke(serviceConfig);
@@ -130,7 +127,7 @@ public static class ContainerExtensions
         return container;
     }
 
-    internal static void ConfigAction(
+    private static void ConfigAction(
         this Container c,
         IMapperConfigurationExpression cfg,
         AutoMapperSimpleInjectorConfiguration serviceCfg)
@@ -142,7 +139,7 @@ public static class ContainerExtensions
         cfg.AddMaps(serviceCfg.AssembliesToScan);
     }
 
-    internal static void RegisterIncludingGenericTypeDefinitions(
+    private static void RegisterIncludingGenericTypeDefinitions(
         this Container container,
         Assembly[] uniqueAssemblies,
         Type processorType)

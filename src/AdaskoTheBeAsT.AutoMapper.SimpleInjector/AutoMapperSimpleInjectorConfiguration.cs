@@ -16,7 +16,7 @@ public class AutoMapperSimpleInjectorConfiguration
     {
         MapperImplementationType = typeof(Mapper);
         Lifestyle = Lifestyle.Singleton;
-        AssembliesToScan = Enumerable.Empty<Assembly>();
+        AssembliesToScan = [];
         MapperConfigurationExpressionAction = (
             container,
             expression) =>
