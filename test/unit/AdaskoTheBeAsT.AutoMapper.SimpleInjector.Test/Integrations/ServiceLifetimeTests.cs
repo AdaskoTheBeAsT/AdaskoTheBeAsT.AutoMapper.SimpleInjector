@@ -64,7 +64,7 @@ public sealed class ServiceLifetimeTests
 
         // Assert
         actual.Should().NotBeNull();
-        actual?.TheValue.Should().Be(1);
+        actual!.TheValue.Should().Be(1);
     }
 
     internal sealed class TestSingletonService : ISingletonService

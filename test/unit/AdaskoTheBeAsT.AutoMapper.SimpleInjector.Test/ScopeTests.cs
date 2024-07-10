@@ -32,7 +32,7 @@ public class ScopeTests
 
             var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
-            dest?.ConvertedValue.Should().Be(15);
+            dest.ConvertedValue.Should().Be(15);
         }
     }
 
@@ -58,7 +58,7 @@ public class ScopeTests
 
             var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
-            dest?.ConvertedValue.Should().Be(15);
+            dest.ConvertedValue.Should().Be(15);
         }
     }
 
@@ -85,7 +85,7 @@ public class ScopeTests
 
             var dest = mapper.Map<Dest2>(new Source2 { ConvertedValue = 5 });
 
-            dest?.ConvertedValue.Should().Be(15);
+            dest.ConvertedValue.Should().Be(15);
         }
     }
 }

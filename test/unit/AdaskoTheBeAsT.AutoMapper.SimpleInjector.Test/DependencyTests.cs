@@ -45,7 +45,7 @@ public sealed class DependencyTests
         var mapper = _container.GetInstance<IMapper>();
         var dest = mapper.Map<Source2, Dest2>(new Source2());
 
-        dest?.ResolvedValue.Should().Be(5);
+        dest.ResolvedValue.Should().Be(5);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public sealed class DependencyTests
         var mapper = _container.GetInstance<IMapper>();
         var dest = mapper.Map<Source2, Dest2>(new Source2 { ConvertedValue = 5 });
 
-        dest?.ConvertedValue.Should().Be(10);
+        dest.ConvertedValue.Should().Be(10);
     }
 
     public void Dispose()

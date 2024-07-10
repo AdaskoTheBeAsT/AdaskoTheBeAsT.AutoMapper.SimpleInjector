@@ -24,7 +24,7 @@ public class AttributeTests
 
         var dest = mapper.Map<Dest3>(source);
 
-        dest?.Value.Should().Be(source.Value);
+        dest.Value.Should().Be(source.Value);
     }
 }
 #pragma warning restore CA1707 // Identifiers should not contain underscores
