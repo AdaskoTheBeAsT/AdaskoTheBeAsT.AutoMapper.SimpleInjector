@@ -10,7 +10,7 @@
     <RepositoryType>github</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Description>Allows easy configuration of AutoMapper and its registration in SimpleInjector.</Description>
-    <PackageVersion>9.1.1</PackageVersion>
+    <PackageVersion>9.2.0</PackageVersion>
     <Authors>Adam "AdaskoTheBeAsT" Pluciński</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>
@@ -34,7 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="SimpleInjector" Version="5.4.6" />
+    <PackageReference Include="SimpleInjector" Version="5.5.0" />
   </ItemGroup>
 
   <ItemGroup>

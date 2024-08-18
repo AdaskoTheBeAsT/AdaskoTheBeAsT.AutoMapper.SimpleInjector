@@ -102,12 +102,12 @@ public sealed class CustomMapperTests
 
         public TDestination Map<TDestination>(object? source) => throw new NotSupportedException();
 
-#pragma warning disable MA0038 // Make method static
+#pragma warning disable MA0038,S2325 // Make method static
         public TDestination Map<TDestination>(
             object source,
             Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-#pragma warning restore MA0038 // Make method static
+#pragma warning restore MA0038,S2325 // Make method static
 
         public TDestination Map<TSource, TDestination>(TSource? source) => throw new NotSupportedException();
 
@@ -153,14 +153,14 @@ public sealed class CustomMapperTests
             Type destinationType) =>
             throw new NotSupportedException();
 
-#pragma warning disable MA0038 // Make method static
+#pragma warning disable MA0038,S2325 // Make method static
         public object Map(
             object source,
             Type sourceType,
             Type destinationType,
             Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-#pragma warning restore MA0038 // Make method static
+#pragma warning restore MA0038,S2325 // Make method static
 
         public object Map(
             object? source,
@@ -169,7 +169,7 @@ public sealed class CustomMapperTests
             Type? destinationType) =>
             throw new NotSupportedException();
 
-#pragma warning disable MA0038 // Make method static
+#pragma warning disable MA0038,S2325 // Make method static
         public object Map(
             object source,
             object destination,
@@ -177,7 +177,7 @@ public sealed class CustomMapperTests
             Type destinationType,
             Action<IMappingOperationOptions> opts) =>
             throw new NotSupportedException();
-#pragma warning restore MA0038 // Make method static
+#pragma warning restore MA0038,S2325 // Make method static
 
         public IQueryable<TDestination> ProjectTo<TDestination>(
             IQueryable source,
