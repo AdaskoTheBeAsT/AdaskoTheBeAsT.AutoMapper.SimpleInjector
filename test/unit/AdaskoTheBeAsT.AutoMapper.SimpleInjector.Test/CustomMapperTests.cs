@@ -61,7 +61,7 @@ public sealed class CustomMapperTests
     public void ShouldResolveMapperWhenCustomMapperInstanceProvided()
     {
         // Arrange
-        var customMapper = new Mock<IMapper>();
+        var customMapper = new Mock<IMapper>(MockBehavior.Strict);
 
         // Act
         _container.AddAutoMapper(
