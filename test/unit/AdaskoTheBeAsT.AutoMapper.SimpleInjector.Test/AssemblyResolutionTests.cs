@@ -4,7 +4,7 @@ using System.Reflection;
 using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
 using AutoMapper.Internal;
-using FluentAssertions;
+using AwesomeAssertions;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;

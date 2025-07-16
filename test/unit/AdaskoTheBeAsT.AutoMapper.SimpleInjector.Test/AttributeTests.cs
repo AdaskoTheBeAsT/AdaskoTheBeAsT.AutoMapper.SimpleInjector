@@ -1,6 +1,6 @@
 using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
-using FluentAssertions;
+using AwesomeAssertions;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;

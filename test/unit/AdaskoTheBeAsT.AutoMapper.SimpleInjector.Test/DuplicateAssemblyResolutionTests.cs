@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using AutoMapper;
-using FluentAssertions;
+using AwesomeAssertions;
 using SimpleInjector;
 using Xunit;
 

@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
 using AutoMapper;
-using FluentAssertions;
-using FluentAssertions.Execution;
+using AwesomeAssertions;
+using AwesomeAssertions.Execution;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;
