@@ -102,18 +102,12 @@ public sealed class ServiceLifetimeTests(ITestOutputHelper output)
         actual!.TheValue.Should().Be(1);
     }
 
-    internal sealed class TestSingletonService : ISingletonService
+    internal sealed class TestSingletonService(IMapper mapper)
+        : ISingletonService
     {
-        private readonly IMapper _mapper;
-
-        public TestSingletonService(IMapper mapper)
-        {
-            _mapper = mapper;
-        }
-
         public Bar? DoTheThing(Foo theObj)
         {
-            return _mapper.Map<Bar>(theObj);
+            return mapper.Map<Bar>(theObj);
         }
     }
 

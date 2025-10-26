@@ -57,7 +57,7 @@ public sealed class CustomMapperTests
         using (new AssertionScope())
         {
             _container.GetInstance<IMapper>().Should().NotBeNull();
-            _container.GetInstance<IMapper>().GetType().Should().Be(typeof(MyCustomMapper));
+            _container.GetInstance<IMapper>().GetType().Should().Be<MyCustomMapper>();
         }
     }
 
