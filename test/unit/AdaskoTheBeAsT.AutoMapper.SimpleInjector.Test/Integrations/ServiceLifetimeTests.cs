@@ -2,14 +2,16 @@ using System;
 using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
 using AwesomeAssertions;
+using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Integrations;
 
 #pragma warning disable CA1812
-public sealed class ServiceLifetimeTests
+public sealed class ServiceLifetimeTests(ITestOutputHelper output)
 {
     private interface ISingletonService
     {
@@ -21,8 +23,24 @@ public sealed class ServiceLifetimeTests
     {
         // Arrange
         using var container = new Container();
+        container.RegisterInstance(output);
+
+        // ILoggerFactory that writes to test output
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        // Wire up ILogger<T> using the factory
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
+
         const Action<Container, IMapperConfigurationExpression>? mapperConfigurationExpressionAction = null;
-        Action action = () =>
+        var action = () =>
         {
             // ReSharper disable once AccessToDisposedClosure
             container.AddAutoMapper(
@@ -45,6 +63,23 @@ public sealed class ServiceLifetimeTests
         // Arrange
         using var container = new Container();
         container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+
+        container.RegisterInstance(output);
+
+        // ILoggerFactory that writes to test output
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        // Wire up ILogger<T> using the factory
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
+
         container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
         container.Register<ISingletonService, TestSingletonService>(Lifestyle.Singleton);
         container.AddAutoMapper(

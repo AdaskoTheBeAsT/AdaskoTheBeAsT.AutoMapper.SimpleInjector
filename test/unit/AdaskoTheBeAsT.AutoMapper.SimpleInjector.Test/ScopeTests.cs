@@ -1,20 +1,37 @@
 using AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 using AutoMapper;
 using AwesomeAssertions;
+using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test;
 
 #pragma warning disable CA1707 // Identifiers should not contain underscores
-public class ScopeTests
+public class ScopeTests(ITestOutputHelper output)
 {
     [Fact]
     public void Can_depend_on_scoped_services_as_transient()
     {
         using var container = new Container();
         container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        container.RegisterInstance(output);
+
+        // ILoggerFactory that writes to test output
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        // Wire up ILogger<T> using the factory
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
         container.AddAutoMapper(
             cfg =>
             {
@@ -41,6 +58,21 @@ public class ScopeTests
     {
         using var container = new Container();
         container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        container.RegisterInstance(output);
+
+        // ILoggerFactory that writes to test output
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        // Wire up ILogger<T> using the factory
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
         container.AddAutoMapper(
             cfg =>
             {
@@ -67,6 +99,21 @@ public class ScopeTests
     {
         using var container = new Container();
         container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        container.RegisterInstance(output);
+
+        // ILoggerFactory that writes to test output
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        // Wire up ILogger<T> using the factory
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
         container.AddAutoMapper(
             cfg =>
             {

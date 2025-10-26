@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
+using Microsoft.Extensions.Logging;
 using SimpleInjector;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector;
@@ -51,7 +52,7 @@ public static class ContainerExtensions
     }
 
     /// <summary>
-    /// Add AutoMapper to SimpleInjector with types from the assemblies that contain the specified types..
+    /// Add AutoMapper to SimpleInjector with types from the assemblies that contain the specified types.
     /// </summary>
     /// <param name="container"><see cref="Container"/>.</param>
     /// <param name="mapperAssemblyMarkerTypes">Types used to mark assemblies to scan.</param>
@@ -64,7 +65,7 @@ public static class ContainerExtensions
     }
 
     /// <summary>
-    /// Add AutoMapper to SimpleInjector with types from the assemblies that contain the specified types..
+    /// Add AutoMapper to SimpleInjector with types from the assemblies that contain the specified types.
     /// </summary>
     /// <param name="container"><see cref="Container"/>.</param>
     /// <param name="mapperAssemblyMarkerTypes">Types used to mark assemblies to scan.</param>
@@ -101,8 +102,12 @@ public static class ContainerExtensions
 
         container.Register<IConfigurationProvider>(
             () =>
-                new MapperConfiguration(
-                    cfg => container.ConfigAction(cfg, serviceConfig)),
+            {
+                var loggerFactory = container.GetInstance<ILoggerFactory>();
+                return new MapperConfiguration(
+                    cfg => container.ConfigAction(cfg, serviceConfig),
+                    loggerFactory);
+            },
             Lifestyle.Singleton);
 
         var customMapperInstance = serviceConfig.MapperInstanceCreator();
@@ -137,6 +142,7 @@ public static class ContainerExtensions
             cfg);
         cfg.ConstructServicesUsing(c.GetInstance);
         cfg.AddMaps(serviceCfg.AssembliesToScan);
+        cfg.LicenseKey = serviceCfg.LicenseKey;
     }
 
     private static void RegisterIncludingGenericTypeDefinitions(

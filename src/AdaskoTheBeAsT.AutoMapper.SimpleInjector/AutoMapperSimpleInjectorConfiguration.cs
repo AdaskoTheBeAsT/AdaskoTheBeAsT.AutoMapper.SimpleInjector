@@ -28,6 +28,7 @@ public class AutoMapperSimpleInjectorConfiguration
             _ = expression;
         };
         MapperInstanceCreator = () => null;
+        LicenseKey = string.Empty;
     }
 
     /// <summary>
@@ -60,6 +61,11 @@ public class AutoMapperSimpleInjectorConfiguration
     /// Configuration action for MapperConfigurationExpression.
     /// </summary>
     public Action<Container, IMapperConfigurationExpression> MapperConfigurationExpressionAction { get; private set; }
+
+    /// <summary>
+    /// Gets the license key associated with the application.
+    /// </summary>
+    public string LicenseKey { get; private set; }
 
     /// <summary>
     /// Register custom implementation of <see cref="IMapper"/> type
@@ -181,7 +187,20 @@ public class AutoMapperSimpleInjectorConfiguration
         Action<Container, IMapperConfigurationExpression> mapperConfigurationExpressionAction)
     {
         MapperConfigurationExpressionAction = mapperConfigurationExpressionAction
-                                              ?? throw new ArgumentNullException(nameof(mapperConfigurationExpressionAction));
+            ?? throw new ArgumentNullException(nameof(mapperConfigurationExpressionAction));
+        return this;
+    }
+
+    /// <summary>
+    /// Sets the license key for the configuration.
+    /// </summary>
+    /// <param name="licenseKey">The license key to be used. Cannot be <see langword="null"/>.</param>
+    /// <returns>The current <see cref="AutoMapperSimpleInjectorConfiguration"/> instance with the license key applied.</returns>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="licenseKey"/> is <see langword="null"/>.</exception>
+    public AutoMapperSimpleInjectorConfiguration WithLicenseKey(string licenseKey)
+    {
+        LicenseKey = licenseKey
+            ?? throw new ArgumentNullException(nameof(licenseKey));
         return this;
     }
 }
