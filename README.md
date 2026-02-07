@@ -87,7 +87,7 @@ This library automatically registers the following with your container:
 
 | Type | Registration | Description |
 |------|--------------|-------------|
-| `IConfigurationProvider` | **Singleton** | AutoMapper configuration |
+| `IConfigurationProvider` | **Singleton** | AutoMapper configuration (not registered when using custom mapper instance) |
 | `IMapper` | **Singleton*** | Main mapper instance |
 | `ITypeConverter<,>` | **Transient** | Custom type converters |
 | `IValueConverter<,>` | **Transient** | Custom value converters |
@@ -209,7 +209,9 @@ container.AddAutoMapper(cfg =>
 
 ### Unit Testing with Mock IMapper
 
-Perfect for unit tests using Moq or similar frameworks:
+Perfect for unit tests using Moq or similar frameworks.
+When using a custom mapper instance via `Using(Func<IMapper>)`, `IConfigurationProvider` is **not** registered
+in the container, since the custom mapper fully replaces the default AutoMapper pipeline:
 
 ```csharp
 var testMapper = new Mock<IMapper>();
@@ -333,15 +335,15 @@ public class OrderService
 
 | Method | Description |
 |--------|-------------|
-| `WithMapperAssemblyMarkerTypes(params Type[])` | Specify types to mark assemblies for scanning |
-| `WithAssembliesToScan(IEnumerable<Assembly>)` | Specify assemblies to scan directly |
+| `WithMapperAssemblyMarkerTypes(params Type[])` | Specify types to mark assemblies for scanning (eagerly materialized, throws on null) |
+| `WithAssembliesToScan(IEnumerable<Assembly>)` | Specify assemblies to scan directly (defensively copied, throws on null) |
 | `Using<TMapper>()` | Use a custom `IMapper` implementation |
-| `Using(Func<IMapper>)` | Use a factory function to create `IMapper` (useful for testing) |
+| `Using(Func<IMapper>)` | Use a factory function to create `IMapper` (useful for testing; skips `IConfigurationProvider` registration) |
 | `AsSingleton()` | Register `IMapper` as Singleton (default) |
 | `AsScoped()` | Register `IMapper` as Scoped |
 | `AsTransient()` | Register `IMapper` as Transient |
 | `WithMapperConfigurationExpressionAction(...)` | Add custom mapper configuration |
-| `WithLicenseKey(string)` | Set AutoMapper license key |
+| `WithLicenseKey(string)` | Set AutoMapper license key (only applied when non-null/non-empty) |
 
 ## Requirements
 

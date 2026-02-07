@@ -101,6 +101,72 @@ public sealed class ServiceLifetimeTests(ITestOutputHelper output)
         actual!.TheValue.Should().Be(1);
     }
 
+    [Fact]
+    public void ShouldResolveConfigurationProviderWithoutLicenseKey()
+    {
+        // Arrange
+        using var container = new Container();
+        container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        container.RegisterInstance(output);
+
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
+        container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
+
+        container.AddAutoMapper(
+            cfg => cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests)));
+
+        // Act
+        var configProvider = container.GetInstance<IConfigurationProvider>();
+
+        // Assert
+        configProvider.Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ShouldResolveConfigurationProviderWithLicenseKey()
+    {
+        // Arrange
+        using var container = new Container();
+        container.Options.DefaultScopedLifestyle = new ThreadScopedLifestyle();
+        container.RegisterInstance(output);
+
+        container.RegisterSingleton<ILoggerFactory>(() =>
+            LoggerFactory.Create(builder =>
+            {
+                builder.ClearProviders();
+#pragma warning disable IDISP004
+                builder.AddProvider(new XunitTestOutputLoggerProvider(output));
+#pragma warning restore IDISP004
+                builder.SetMinimumLevel(LogLevel.Trace);
+            }));
+
+        container.Register(typeof(ILogger<>), typeof(Logger<>), Lifestyle.Singleton);
+        container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
+
+        container.AddAutoMapper(
+            cfg =>
+            {
+                cfg.WithMapperAssemblyMarkerTypes(typeof(ServiceLifetimeTests));
+                cfg.WithLicenseKey("test-license-key");
+            });
+
+        // Act
+        var configProvider = container.GetInstance<IConfigurationProvider>();
+
+        // Assert
+        configProvider.Should().NotBeNull();
+    }
+
     internal sealed class TestSingletonService(IMapper mapper)
         : ISingletonService
     {

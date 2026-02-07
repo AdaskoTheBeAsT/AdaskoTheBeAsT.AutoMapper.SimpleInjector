@@ -100,16 +100,6 @@ public static class ContainerExtensions
         container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueConverter<,>));
         container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMappingAction<,>));
 
-        container.Register<IConfigurationProvider>(
-            () =>
-            {
-                var loggerFactory = container.GetInstance<ILoggerFactory>();
-                return new MapperConfiguration(
-                    cfg => container.ConfigAction(cfg, serviceConfig),
-                    loggerFactory);
-            },
-            Lifestyle.Singleton);
-
         var customMapperInstance = serviceConfig.MapperInstanceCreator();
 
         if (customMapperInstance != null)
@@ -118,15 +108,28 @@ public static class ContainerExtensions
                 () => customMapperInstance,
                 serviceConfig.Lifestyle);
         }
-        else if (serviceConfig.MapperImplementationType == typeof(Mapper))
-        {
-            container.Register(
-                () => container.GetInstance<IConfigurationProvider>().CreateMapper(),
-                serviceConfig.Lifestyle);
-        }
         else
         {
-            container.Register(typeof(IMapper), serviceConfig.MapperImplementationType, serviceConfig.Lifestyle);
+            container.Register<IConfigurationProvider>(
+                () =>
+                {
+                    var loggerFactory = container.GetInstance<ILoggerFactory>();
+                    return new MapperConfiguration(
+                        cfg => container.ConfigAction(cfg, serviceConfig),
+                        loggerFactory);
+                },
+                Lifestyle.Singleton);
+
+            if (serviceConfig.MapperImplementationType == typeof(Mapper))
+            {
+                container.Register(
+                    () => container.GetInstance<IConfigurationProvider>().CreateMapper(),
+                    serviceConfig.Lifestyle);
+            }
+            else
+            {
+                container.Register(typeof(IMapper), serviceConfig.MapperImplementationType, serviceConfig.Lifestyle);
+            }
         }
 
         return container;
@@ -142,7 +145,11 @@ public static class ContainerExtensions
             cfg);
         cfg.ConstructServicesUsing(c.GetInstance);
         cfg.AddMaps(serviceCfg.AssembliesToScan);
-        cfg.LicenseKey = serviceCfg.LicenseKey;
+
+        if (!string.IsNullOrEmpty(serviceCfg.LicenseKey))
+        {
+            cfg.LicenseKey = serviceCfg.LicenseKey;
+        }
     }
 
     private static void RegisterIncludingGenericTypeDefinitions(
@@ -162,7 +169,7 @@ public static class ContainerExtensions
         container.Collection.Register(processorType, implementingTypes);
         foreach (var implementingType in implementingTypes)
         {
-            container.Register(implementingType);
+            container.Register(implementingType, implementingType, Lifestyle.Transient);
         }
     }
 }

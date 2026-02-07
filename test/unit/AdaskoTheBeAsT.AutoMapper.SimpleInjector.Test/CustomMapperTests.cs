@@ -95,6 +95,27 @@ public sealed class CustomMapperTests
         }
     }
 
+    [Fact]
+    public void ShouldNotRegisterConfigurationProviderWhenCustomMapperInstanceProvided()
+    {
+        // Arrange
+        var customMapper = new Mock<IMapper>(MockBehavior.Strict);
+
+        // Act
+        _container.AddAutoMapper(
+            cfg =>
+            {
+                cfg.Using(() => customMapper.Object);
+                cfg.WithMapperAssemblyMarkerTypes(typeof(CustomMapperTests));
+            });
+
+        // Assert
+        var registration = Array.Find(
+            _container.GetCurrentRegistrations(),
+            r => r.ServiceType == typeof(IConfigurationProvider));
+        registration.Should().BeNull();
+    }
+
     public void Dispose()
     {
         _container.Dispose();

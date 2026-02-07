@@ -28,7 +28,6 @@ public class AutoMapperSimpleInjectorConfiguration
             _ = expression;
         };
         MapperInstanceCreator = () => null;
-        LicenseKey = string.Empty;
     }
 
     /// <summary>
@@ -65,7 +64,7 @@ public class AutoMapperSimpleInjectorConfiguration
     /// <summary>
     /// Gets the license key associated with the application.
     /// </summary>
-    public string LicenseKey { get; private set; }
+    public string? LicenseKey { get; private set; }
 
     /// <summary>
     /// Register custom implementation of <see cref="IMapper"/> type
@@ -143,7 +142,8 @@ public class AutoMapperSimpleInjectorConfiguration
     /// with assemblies to scan configured.</returns>
     public AutoMapperSimpleInjectorConfiguration WithAssembliesToScan(IEnumerable<Assembly> assembliesToScan)
     {
-        AssembliesToScan = assembliesToScan;
+        AssembliesToScan = assembliesToScan?.ToArray()
+            ?? throw new ArgumentNullException(nameof(assembliesToScan));
         return this;
     }
 
@@ -158,7 +158,8 @@ public class AutoMapperSimpleInjectorConfiguration
     /// with assemblies to scan configured.</returns>
     public AutoMapperSimpleInjectorConfiguration WithMapperAssemblyMarkerTypes(params Type[] mapperAssemblyMarkerTypes)
     {
-        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly);
+        ArgumentNullException.ThrowIfNull(mapperAssemblyMarkerTypes);
+        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray();
         return this;
     }
 
@@ -173,7 +174,8 @@ public class AutoMapperSimpleInjectorConfiguration
     /// with assemblies to scan configured.</returns>
     public AutoMapperSimpleInjectorConfiguration WithMapperAssemblyMarkerTypes(IEnumerable<Type> mapperAssemblyMarkerTypes)
     {
-        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly);
+        ArgumentNullException.ThrowIfNull(mapperAssemblyMarkerTypes);
+        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray();
         return this;
     }
 
