@@ -9,7 +9,6 @@ using Microsoft.Extensions.Logging;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test;
 

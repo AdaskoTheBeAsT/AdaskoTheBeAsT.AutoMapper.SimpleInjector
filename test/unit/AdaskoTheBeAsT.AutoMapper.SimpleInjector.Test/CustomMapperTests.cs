@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using SimpleInjector;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test;
 
