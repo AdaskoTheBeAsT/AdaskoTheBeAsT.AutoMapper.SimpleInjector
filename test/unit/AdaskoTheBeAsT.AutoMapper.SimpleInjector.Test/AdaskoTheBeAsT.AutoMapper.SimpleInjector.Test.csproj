@@ -3,15 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <ProjectGuid>4B75EFC7-406C-423C-AB76-15FFFCF45CAD</ProjectGuid>
-    <OutputType>exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.5" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.14" />
   </ItemGroup>
 
 
