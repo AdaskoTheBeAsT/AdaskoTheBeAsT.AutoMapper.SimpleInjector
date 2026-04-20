@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
     <ProjectGuid>{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}</ProjectGuid>
   </PropertyGroup>
 
@@ -10,7 +10,6 @@
     <RepositoryType>github</RepositoryType>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Description>Allows easy configuration of AutoMapper and its registration in SimpleInjector.</Description>
-    <PackageVersion>13.1.0</PackageVersion>
     <Authors>Adam "AdaskoTheBeAsT" Pluciński</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>true</IncludeSymbols>
@@ -34,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="[16.1.1,17.0.0)" />
-    <PackageReference Include="SimpleInjector" Version="[5.5.0,6.0.0)" />
+    <PackageReference Include="SimpleInjector" Version="[5.5.1,6.0.0)" />
   </ItemGroup>
 
   <ItemGroup>
