@@ -2,13 +2,24 @@
 
 > Seamless AutoMapper integration for SimpleInjector with automatic registration and configuration
 
+[![CI](https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/actions/workflows/ci.yml/badge.svg?branch=master&event=push)](https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/actions/workflows/ci.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector/badge)](https://www.codefactor.io/repository/github/adaskothebeast/adaskothebeast.automapper.simpleinjector)
-[![Build Status](https://img.shields.io/azure-devops/build/adaskothebeast/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)](https://img.shields.io/azure-devops/build/adaskothebeast/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)
-![Azure DevOps tests](https://img.shields.io/azure-devops/tests/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16)
-![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/16?style=plastic)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=alert_status)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
-![Sonar Coverage](https://img.shields.io/sonar/coverage/AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector?server=https%3A%2F%2Fsonarcloud.io&style=plastic)
-![Nuget](https://img.shields.io/nuget/dt/AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=coverage)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=security_rating)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=bugs)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=code_smells)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=sqale_index)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector&metric=ncloc)](https://sonarcloud.io/dashboard?id=AdaskoTheBeAsT_AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![NuGet Version](https://img.shields.io/nuget/v/AdaskoTheBeAsT.AutoMapper.SimpleInjector)](https://www.nuget.org/packages/AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/AdaskoTheBeAsT.AutoMapper.SimpleInjector)](https://www.nuget.org/packages/AdaskoTheBeAsT.AutoMapper.SimpleInjector)
+[![GitHub stars](https://img.shields.io/github/stars/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector?style=flat)](https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector)](https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector)](https://github.com/AdaskoTheBeAsT/AdaskoTheBeAsT.AutoMapper.SimpleInjector/commits)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAdaskoTheBeAsT%2FAdaskoTheBeAsT.AutoMapper.SimpleInjector?ref=badge_shield)
 
 ## Why Use This?
@@ -85,15 +96,15 @@ public class UserService
 
 This library automatically registers the following with your container:
 
-| Type | Registration | Description |
-|------|--------------|-------------|
-| `IConfigurationProvider` | **Singleton** | AutoMapper configuration (not registered when using custom mapper instance) |
-| `IMapper` | **Singleton*** | Main mapper instance |
-| `ITypeConverter<,>` | **Transient** | Custom type converters |
-| `IValueConverter<,>` | **Transient** | Custom value converters |
-| `IValueResolver<,,>` | **Transient** | Custom value resolvers |
-| `IMemberValueResolver<,,,>` | **Transient** | Custom member resolvers |
-| `IMappingAction<,>` | **Transient** | Custom mapping actions |
+| Type                        | Registration   | Description                                                                 |
+| --------------------------- | -------------- | --------------------------------------------------------------------------- |
+| `IConfigurationProvider`    | **Singleton**  | AutoMapper configuration (not registered when using custom mapper instance) |
+| `IMapper`                   | **Singleton*** | Main mapper instance                                                        |
+| `ITypeConverter<,>`         | **Transient**  | Custom type converters                                                      |
+| `IValueConverter<,>`        | **Transient**  | Custom value converters                                                     |
+| `IValueResolver<,,>`        | **Transient**  | Custom value resolvers                                                      |
+| `IMemberValueResolver<,,,>` | **Transient**  | Custom member resolvers                                                     |
+| `IMappingAction<,>`         | **Transient**  | Custom mapping actions                                                      |
 
 _*Lifestyle is configurable (Singleton/Scoped/Transient)_
 
@@ -323,27 +334,27 @@ public class OrderService
 
 ### AddAutoMapper Extension Methods
 
-| Method | Description |
-|--------|-------------|
-| `AddAutoMapper(params Type[])` | Register AutoMapper by scanning assemblies containing the specified types |
-| `AddAutoMapper(params Assembly[])` | Register AutoMapper by scanning the specified assemblies |
-| `AddAutoMapper(IEnumerable<Assembly>)` | Register AutoMapper by scanning the specified assemblies |
-| `AddAutoMapper(IEnumerable<Type>)` | Register AutoMapper by scanning assemblies containing the specified types |
-| `AddAutoMapper(Action<AutoMapperSimpleInjectorConfiguration>)` | Register AutoMapper with custom configuration |
+| Method                                                         | Description                                                               |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `AddAutoMapper(params Type[])`                                 | Register AutoMapper by scanning assemblies containing the specified types |
+| `AddAutoMapper(params Assembly[])`                             | Register AutoMapper by scanning the specified assemblies                  |
+| `AddAutoMapper(IEnumerable<Assembly>)`                         | Register AutoMapper by scanning the specified assemblies                  |
+| `AddAutoMapper(IEnumerable<Type>)`                             | Register AutoMapper by scanning assemblies containing the specified types |
+| `AddAutoMapper(Action<AutoMapperSimpleInjectorConfiguration>)` | Register AutoMapper with custom configuration                             |
 
 ### Configuration Methods
 
-| Method | Description |
-|--------|-------------|
-| `WithMapperAssemblyMarkerTypes(params Type[])` | Specify types to mark assemblies for scanning (eagerly materialized, throws on null) |
-| `WithAssembliesToScan(IEnumerable<Assembly>)` | Specify assemblies to scan directly (defensively copied, throws on null) |
-| `Using<TMapper>()` | Use a custom `IMapper` implementation |
-| `Using(Func<IMapper>)` | Use a factory function to create `IMapper` (useful for testing; skips `IConfigurationProvider` registration) |
-| `AsSingleton()` | Register `IMapper` as Singleton (default) |
-| `AsScoped()` | Register `IMapper` as Scoped |
-| `AsTransient()` | Register `IMapper` as Transient |
-| `WithMapperConfigurationExpressionAction(...)` | Add custom mapper configuration |
-| `WithLicenseKey(string)` | Set AutoMapper license key (only applied when non-null/non-empty) |
+| Method                                         | Description                                                                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| `WithMapperAssemblyMarkerTypes(params Type[])` | Specify types to mark assemblies for scanning (eagerly materialized, throws on null)                         |
+| `WithAssembliesToScan(IEnumerable<Assembly>)`  | Specify assemblies to scan directly (defensively copied, throws on null)                                     |
+| `Using<TMapper>()`                             | Use a custom `IMapper` implementation                                                                        |
+| `Using(Func<IMapper>)`                         | Use a factory function to create `IMapper` (useful for testing; skips `IConfigurationProvider` registration) |
+| `AsSingleton()`                                | Register `IMapper` as Singleton (default)                                                                    |
+| `AsScoped()`                                   | Register `IMapper` as Scoped                                                                                 |
+| `AsTransient()`                                | Register `IMapper` as Transient                                                                              |
+| `WithMapperConfigurationExpressionAction(...)` | Add custom mapper configuration                                                                              |
+| `WithLicenseKey(string)`                       | Set AutoMapper license key (only applied when non-null/non-empty)                                            |
 
 ## Requirements
 
