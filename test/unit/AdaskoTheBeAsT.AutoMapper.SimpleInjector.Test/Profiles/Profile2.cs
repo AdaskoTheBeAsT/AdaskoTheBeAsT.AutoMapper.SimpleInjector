@@ -2,6 +2,7 @@ using AutoMapper;
 
 namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector.Test.Profiles;
 
+#pragma warning disable MA0182
 internal sealed class Profile2 : Profile
 {
     public Profile2()
@@ -11,3 +12,4 @@ internal sealed class Profile2 : Profile
             .ForMember(d => d.ConvertedValue, opt => opt.ConvertUsing<DependencyValueConverter, int>());
     }
 }
+#pragma warning restore MA0182

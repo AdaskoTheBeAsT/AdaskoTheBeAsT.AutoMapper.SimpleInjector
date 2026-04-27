@@ -14,7 +14,7 @@ public class AutoMapperSimpleInjectorConfigurationTests
     [Fact]
     public void DefaultLicenseKey_ShouldBeNull()
     {
-        // Arrange & Act
+        // Arrange and Act
         var config = new AutoMapperSimpleInjectorConfiguration();
 
         // Assert

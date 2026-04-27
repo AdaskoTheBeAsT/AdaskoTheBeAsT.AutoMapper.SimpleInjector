@@ -159,7 +159,7 @@ public class AutoMapperSimpleInjectorConfiguration
     public AutoMapperSimpleInjectorConfiguration WithMapperAssemblyMarkerTypes(params Type[] mapperAssemblyMarkerTypes)
     {
         ArgumentNullException.ThrowIfNull(mapperAssemblyMarkerTypes);
-        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray();
+        AssembliesToScan = [.. mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly)];
         return this;
     }
 
@@ -175,7 +175,7 @@ public class AutoMapperSimpleInjectorConfiguration
     public AutoMapperSimpleInjectorConfiguration WithMapperAssemblyMarkerTypes(IEnumerable<Type> mapperAssemblyMarkerTypes)
     {
         ArgumentNullException.ThrowIfNull(mapperAssemblyMarkerTypes);
-        AssembliesToScan = mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly).ToArray();
+        AssembliesToScan = [.. mapperAssemblyMarkerTypes.Select(t => t.GetTypeInfo().Assembly)];
         return this;
     }
 
