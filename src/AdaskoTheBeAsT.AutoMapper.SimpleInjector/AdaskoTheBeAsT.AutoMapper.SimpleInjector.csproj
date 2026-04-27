@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="[16.1.1,17.0.0)" />
-    <PackageReference Include="SimpleInjector" Version="[5.5.1,6.0.0)" />
+    <PackageReference Include="SimpleInjector" Version="[5.5.2,6.0.0)" />
   </ItemGroup>
 
   <ItemGroup>
