@@ -30,7 +30,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
+#pragma warning restore S8969
         }
     }
 
@@ -53,7 +55,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
+#pragma warning restore S8969
         }
     }
 
@@ -76,7 +80,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
+#pragma warning restore S8969
         }
     }
 
@@ -99,7 +105,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Transient);
+#pragma warning restore S8969
         }
     }
 
@@ -122,7 +130,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Name.Should().Be("Thread Scoped");
+#pragma warning restore S8969
         }
     }
 
@@ -146,7 +156,9 @@ public class ServiceLifetimeTests
             serviceDescriptor.Should().NotBeNull();
 
             // ReSharper disable once PossibleNullReferenceException
+#pragma warning disable S8969
             serviceDescriptor!.Lifestyle.Should().Be(Lifestyle.Singleton);
+#pragma warning restore S8969
         }
     }
 }

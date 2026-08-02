@@ -98,7 +98,9 @@ public sealed class ServiceLifetimeTests(ITestOutputHelper output)
 
         // Assert
         actual.Should().NotBeNull();
+#pragma warning disable S8969
         actual!.TheValue.Should().Be(1);
+#pragma warning restore S8969
     }
 
     [Fact]

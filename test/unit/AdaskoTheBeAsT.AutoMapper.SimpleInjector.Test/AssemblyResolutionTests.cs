@@ -54,7 +54,9 @@ public sealed class AssemblyResolutionTests
         configurationProvider.Should().NotBeNull();
         var globalConfiguration = configurationProvider as IGlobalConfiguration;
         globalConfiguration.Should().NotBeNull();
+#pragma warning disable S8969
         globalConfiguration!.GetAllTypeMaps().Should().HaveCount(3);
+#pragma warning restore S8969
     }
 
     [Fact]
@@ -79,7 +81,9 @@ public sealed class AssemblyResolutionTests
         configurationProvider.Should().NotBeNull();
         var globalConfiguration = configurationProvider as IGlobalConfiguration;
         globalConfiguration.Should().NotBeNull();
+#pragma warning disable S8969
         globalConfiguration!.GetAllTypeMaps().Should().HaveCount(3);
+#pragma warning restore S8969
     }
 
     [Fact]
@@ -104,7 +108,9 @@ public sealed class AssemblyResolutionTests
         configurationProvider.Should().NotBeNull();
         var globalConfiguration = configurationProvider as IGlobalConfiguration;
         globalConfiguration.Should().NotBeNull();
+#pragma warning disable S8969
         globalConfiguration!.GetAllTypeMaps().Should().HaveCount(3);
+#pragma warning restore S8969
     }
 
     [Fact]
@@ -129,7 +135,9 @@ public sealed class AssemblyResolutionTests
         configurationProvider.Should().NotBeNull();
         var globalConfiguration = configurationProvider as IGlobalConfiguration;
         globalConfiguration.Should().NotBeNull();
+#pragma warning disable S8969
         globalConfiguration!.GetAllTypeMaps().Should().HaveCount(3);
+#pragma warning restore S8969
     }
 
     [Fact]

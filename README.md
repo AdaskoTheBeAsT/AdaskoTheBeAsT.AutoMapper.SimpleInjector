@@ -27,7 +27,7 @@
 This library eliminates the boilerplate of manually registering AutoMapper with SimpleInjector. It automatically:
 
 - 🔍 **Scans assemblies** for `Profile` classes and registers them
-- 🔄 **Auto-registers** all AutoMapper extensions (`ITypeConverter`, `IValueResolver`, `IMemberValueResolver`, `IValueConverter`, `IMappingAction`)
+- 🔄 **Auto-registers** all AutoMapper extensions (`ITypeConverter`, `IValueResolver`, `IMemberValueResolver`, `IValueConverter`, `IDestinationFactory`, `ICondition`, `IPreCondition`, `IMappingAction`)
 - 💉 **Handles dependency injection** for your custom converters and resolvers
 - ⚙️ **Configures everything** with a single fluent API call
 - 🎯 **Supports .NET 8, 9, and 10**
@@ -104,6 +104,9 @@ This library automatically registers the following with your container:
 | `IValueConverter<,>`        | **Transient**  | Custom value converters                                                     |
 | `IValueResolver<,,>`        | **Transient**  | Custom value resolvers                                                      |
 | `IMemberValueResolver<,,,>` | **Transient**  | Custom member resolvers                                                     |
+| `IDestinationFactory<,>`    | **Transient**  | Custom destination object factories (`ConstructUsing<T>()`)                 |
+| `ICondition<,,>`            | **Transient**  | Custom member conditions (`Condition<T>()`)                                 |
+| `IPreCondition<,>`          | **Transient**  | Custom member pre-conditions (`PreCondition<T>()`)                          |
 | `IMappingAction<,>`         | **Transient**  | Custom mapping actions                                                      |
 
 _*Lifestyle is configurable (Singleton/Scoped/Transient)_
@@ -361,6 +364,37 @@ public class OrderService
 - **.NET 8.0, 9.0, or 10.0**
 - **AutoMapper 15.1.0+**
 - **SimpleInjector 5.5.0+**
+
+## Running Tests Locally
+
+```bash
+dotnet test
+```
+
+The test suite needs an AutoMapper license key. AutoMapper resolves it from the environment
+(`AUTOMAPPER_LICENSE_KEY`, then the shared `LUCKYPENNY_LICENSE_KEY`) unless a key is passed
+explicitly via `WithLicenseKey(...)`. In CI the value comes from the `AUTOMAPPER_LICENSE_KEY`
+GitHub secret (see `.github/workflows/ci.yml`).
+
+To supply it locally, copy the template and fill in your key:
+
+```bash
+cp .env.example .env
+```
+
+```dotenv
+AUTOMAPPER_LICENSE_KEY=your-license-key
+```
+
+`.env` is git ignored, so the key never lands in the repository. A module initializer in the test
+project (`TestEnvironment`) uses [dotenv.net](https://github.com/bolorundurowb/dotenv.net) to probe
+upwards from the test output directory for the nearest `.env` and exports every `KEY=VALUE` entry
+into the test process before the first `MapperConfiguration` is built. Variables that are already
+set in the environment are never overwritten, so CI values always win over the file.
+
+This works the same for `dotnet test` and for the test runners in Visual Studio, Rider, and VS Code.
+If you prefer not to keep a file in the working tree, set a user-level environment variable instead
+(`setx AUTOMAPPER_LICENSE_KEY "your-license-key"` on Windows) and restart your IDE or shell.
 
 ## Credits
 
