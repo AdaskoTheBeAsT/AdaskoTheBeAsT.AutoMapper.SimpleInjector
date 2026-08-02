@@ -387,9 +387,10 @@ AUTOMAPPER_LICENSE_KEY=your-license-key
 ```
 
 `.env` is git ignored, so the key never lands in the repository. A module initializer in the test
-project (`DotEnv`) walks up from the test output directory to the nearest `.env` and exports every
-`KEY=VALUE` entry into the test process before the first `MapperConfiguration` is built. Variables
-that are already set in the environment are never overwritten, so CI values always win over the file.
+project (`TestEnvironment`) uses [dotenv.net](https://github.com/bolorundurowb/dotenv.net) to probe
+upwards from the test output directory for the nearest `.env` and exports every `KEY=VALUE` entry
+into the test process before the first `MapperConfiguration` is built. Variables that are already
+set in the environment are never overwritten, so CI values always win over the file.
 
 This works the same for `dotnet test` and for the test runners in Visual Studio, Rider, and VS Code.
 If you prefer not to keep a file in the working tree, set a user-level environment variable instead
