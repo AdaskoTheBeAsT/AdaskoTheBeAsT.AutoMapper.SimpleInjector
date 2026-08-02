@@ -51,7 +51,9 @@ public sealed class TypeResolutionTests
         configurationProvider.Should().NotBeNull();
         var globalConfiguration = configurationProvider as IGlobalConfiguration;
         globalConfiguration.Should().NotBeNull();
+#pragma warning disable S8969
         globalConfiguration!.GetAllTypeMaps().Should().HaveCount(3);
+#pragma warning restore S8969
     }
 
     [Fact]
@@ -88,6 +90,37 @@ public sealed class TypeResolutionTests
     public void ShouldResolveValueConverter()
     {
         _container.GetInstance<FooValueConverter>().Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ShouldResolveDestinationFactory()
+    {
+        _container.GetInstance<FooDestinationFactory>().Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ShouldResolveCondition()
+    {
+        _container.GetInstance<FooCondition>().Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ShouldResolvePreCondition()
+    {
+        _container.GetInstance<FooPreCondition>().Should().NotBeNull();
+    }
+
+    [Fact]
+    public void ShouldRegisterAllAutoMapperInterfacesAsCollections()
+    {
+        _container.GetAllInstances<IValueResolver<object, object, object>>().Should().ContainItemsAssignableTo<FooValueResolver>();
+        _container.GetAllInstances<IMemberValueResolver<object, object, object, object>>().Should().ContainItemsAssignableTo<FooMemberValueResolver>();
+        _container.GetAllInstances<ITypeConverter<object, object>>().Should().ContainItemsAssignableTo<FooTypeConverter>();
+        _container.GetAllInstances<IValueConverter<int, int>>().Should().NotBeEmpty();
+        _container.GetAllInstances<IDestinationFactory<object, object>>().Should().ContainItemsAssignableTo<FooDestinationFactory>();
+        _container.GetAllInstances<ICondition<object, object, object>>().Should().ContainItemsAssignableTo<FooCondition>();
+        _container.GetAllInstances<IPreCondition<object, object>>().Should().ContainItemsAssignableTo<FooPreCondition>();
+        _container.GetAllInstances<IMappingAction<object, object>>().Should().ContainItemsAssignableTo<FooMappingAction>();
     }
 
     public void Dispose()

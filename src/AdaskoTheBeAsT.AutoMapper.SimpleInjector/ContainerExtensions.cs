@@ -14,7 +14,9 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector;
 /// <list type="bullet">
 /// <item> Finds <see cref="Profile"/> classes and initializes a new <see cref="MapperConfiguration" />,</item>
 /// <item> Scans for <see cref="ITypeConverter{TSource,TDestination}"/>, <see cref="IValueResolver{TSource,TDestination,TDestMember}"/>,
-/// <see cref="IMemberValueResolver{TSource,TDestination,TSourceMember,TDestMember}" /> and <see cref="IMappingAction{TSource,TDestination}"/>
+/// <see cref="IMemberValueResolver{TSource,TDestination,TSourceMember,TDestMember}" />, <see cref="IValueConverter{TSourceMember,TDestinationMember}"/>,
+/// <see cref="IDestinationFactory{TSource,TDestination}"/>, <see cref="ICondition{TSource,TDestination,TMember}"/>,
+/// <see cref="IPreCondition{TSource,TDestination}"/> and <see cref="IMappingAction{TSource,TDestination}"/>
 /// implementations and registers them as <see cref="Lifestyle.Transient"/>, </item>
 /// <item> Registers <see cref="IConfigurationProvider"/> as <see cref="Lifestyle.Singleton"/>, and</item>
 /// <item> Registers <see cref="IMapper"/> as a configurable <see cref="Lifestyle"/> (default is <see cref="Lifestyle.Singleton"/>)</item>
@@ -25,6 +27,22 @@ namespace AdaskoTheBeAsT.AutoMapper.SimpleInjector;
 /// </summary>
 public static class ContainerExtensions
 {
+    /// <summary>
+    /// Open generic AutoMapper interfaces whose implementations are auto registered.
+    /// Kept in sync with AmTypes in AutoMapper's own ServiceCollectionExtensions.
+    /// </summary>
+    private static readonly Type[] AutoMapperOpenTypes =
+    [
+        typeof(IValueResolver<,,>),
+        typeof(IMemberValueResolver<,,,>),
+        typeof(ITypeConverter<,>),
+        typeof(IValueConverter<,>),
+        typeof(IDestinationFactory<,>),
+        typeof(ICondition<,,>),
+        typeof(IPreCondition<,>),
+        typeof(IMappingAction<,>),
+    ];
+
     /// <summary>
     /// Add AutoMapper to SimpleInjector with assemblies to scan.
     /// </summary>
@@ -94,11 +112,13 @@ public static class ContainerExtensions
 
         var uniqueAssemblies = serviceConfig.AssembliesToScan.Distinct().ToArray();
 
-        container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueResolver<,,>));
-        container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMemberValueResolver<,,,>));
-        container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(ITypeConverter<,>));
-        container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IValueConverter<,>));
-        container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, typeof(IMappingAction<,>));
+        // A single class can implement several AutoMapper interfaces, so concrete
+        // self registrations have to be deduplicated across all open types.
+        var selfRegistered = new HashSet<Type>();
+        foreach (var openType in AutoMapperOpenTypes)
+        {
+            container.RegisterIncludingGenericTypeDefinitions(uniqueAssemblies, openType, selfRegistered);
+        }
 
         var customMapperInstance = serviceConfig.MapperInstanceCreator();
 
@@ -155,7 +175,8 @@ public static class ContainerExtensions
     private static void RegisterIncludingGenericTypeDefinitions(
         this Container container,
         Assembly[] uniqueAssemblies,
-        Type processorType)
+        Type processorType,
+        HashSet<Type> selfRegistered)
     {
         var implementingTypes = container.GetTypesToRegister(
             processorType,
@@ -167,9 +188,12 @@ public static class ContainerExtensions
             }).ToList();
 
         container.Collection.Register(processorType, implementingTypes);
-        foreach (var implementingType in implementingTypes)
+
+        var notYetRegistered = implementingTypes.Where(t => !selfRegistered.Contains(t)).ToList();
+        foreach (var implementingType in notYetRegistered)
         {
             container.Register(implementingType, implementingType, Lifestyle.Transient);
+            _ = selfRegistered.Add(implementingType);
         }
     }
 }

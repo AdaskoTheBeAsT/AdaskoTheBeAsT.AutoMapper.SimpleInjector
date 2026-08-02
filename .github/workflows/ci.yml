@@ -6,6 +6,7 @@ on:
     branches: [ main, master ]
     tags:
       - "v*"
+  workflow_dispatch:
 
 permissions:
   checks: write
@@ -30,3 +31,5 @@ jobs:
     secrets:
       sonar_token: ${{ secrets.SONAR_TOKEN }}
       nuget_api_key: ${{ secrets.NUGET_API_KEY }}
+      test_env_secrets: |
+        AUTOMAPPER_LICENSE_KEY=${{ secrets.AUTOMAPPER_LICENSE_KEY }}

@@ -27,7 +27,7 @@
 This library eliminates the boilerplate of manually registering AutoMapper with SimpleInjector. It automatically:
 
 - 🔍 **Scans assemblies** for `Profile` classes and registers them
-- 🔄 **Auto-registers** all AutoMapper extensions (`ITypeConverter`, `IValueResolver`, `IMemberValueResolver`, `IValueConverter`, `IMappingAction`)
+- 🔄 **Auto-registers** all AutoMapper extensions (`ITypeConverter`, `IValueResolver`, `IMemberValueResolver`, `IValueConverter`, `IDestinationFactory`, `ICondition`, `IPreCondition`, `IMappingAction`)
 - 💉 **Handles dependency injection** for your custom converters and resolvers
 - ⚙️ **Configures everything** with a single fluent API call
 - 🎯 **Supports .NET 8, 9, and 10**
@@ -104,6 +104,9 @@ This library automatically registers the following with your container:
 | `IValueConverter<,>`        | **Transient**  | Custom value converters                                                     |
 | `IValueResolver<,,>`        | **Transient**  | Custom value resolvers                                                      |
 | `IMemberValueResolver<,,,>` | **Transient**  | Custom member resolvers                                                     |
+| `IDestinationFactory<,>`    | **Transient**  | Custom destination object factories (`ConstructUsing<T>()`)                 |
+| `ICondition<,,>`            | **Transient**  | Custom member conditions (`Condition<T>()`)                                 |
+| `IPreCondition<,>`          | **Transient**  | Custom member pre-conditions (`PreCondition<T>()`)                          |
 | `IMappingAction<,>`         | **Transient**  | Custom mapping actions                                                      |
 
 _*Lifestyle is configurable (Singleton/Scoped/Transient)_
