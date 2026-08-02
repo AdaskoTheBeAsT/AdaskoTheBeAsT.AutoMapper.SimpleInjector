@@ -360,3 +360,7 @@ NDependOut/
 
 .dotcover/*
 !.dotcover/.gitkeep
+
+# Local secrets consumed by test runs (AUTOMAPPER_LICENSE_KEY etc.)
+.env
+!.env.example

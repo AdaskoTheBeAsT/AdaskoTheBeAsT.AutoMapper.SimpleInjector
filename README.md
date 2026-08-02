@@ -365,6 +365,36 @@ public class OrderService
 - **AutoMapper 15.1.0+**
 - **SimpleInjector 5.5.0+**
 
+## Running Tests Locally
+
+```bash
+dotnet test
+```
+
+The test suite needs an AutoMapper license key. AutoMapper resolves it from the environment
+(`AUTOMAPPER_LICENSE_KEY`, then the shared `LUCKYPENNY_LICENSE_KEY`) unless a key is passed
+explicitly via `WithLicenseKey(...)`. In CI the value comes from the `AUTOMAPPER_LICENSE_KEY`
+GitHub secret (see `.github/workflows/ci.yml`).
+
+To supply it locally, copy the template and fill in your key:
+
+```bash
+cp .env.example .env
+```
+
+```dotenv
+AUTOMAPPER_LICENSE_KEY=your-license-key
+```
+
+`.env` is git ignored, so the key never lands in the repository. A module initializer in the test
+project (`DotEnv`) walks up from the test output directory to the nearest `.env` and exports every
+`KEY=VALUE` entry into the test process before the first `MapperConfiguration` is built. Variables
+that are already set in the environment are never overwritten, so CI values always win over the file.
+
+This works the same for `dotnet test` and for the test runners in Visual Studio, Rider, and VS Code.
+If you prefer not to keep a file in the working tree, set a user-level environment variable instead
+(`setx AUTOMAPPER_LICENSE_KEY "your-license-key"` on Windows) and restart your IDE or shell.
+
 ## Credits
 
 Special thanks to:
