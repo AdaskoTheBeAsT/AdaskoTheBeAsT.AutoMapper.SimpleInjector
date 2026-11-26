@@ -41,6 +41,11 @@ dotnet add package AdaskoTheBeAsT.AutoMapper.SimpleInjector
 ### 1. Create Your Mapping Profiles
 
 ```csharp
+using AutoMapper;
+
+public sealed record UserEntity(int Id, string Name);
+public sealed record UserDto(int Id, string Name);
+
 public class UserProfile : Profile
 {
     public UserProfile()
@@ -53,29 +58,29 @@ public class UserProfile : Profile
 
 ### 2. Register AutoMapper with SimpleInjector
 
+Register an `ILoggerFactory` before resolving the mapper. Use your application's
+logger factory, or use `NullLoggerFactory` for a console example that does not need
+logging. Set `AUTOMAPPER_LICENSE_KEY` in the application's environment (see
+[Setting the AutoMapper License Key](#setting-the-automapper-license-key)).
+
 ```csharp
 using AdaskoTheBeAsT.AutoMapper.SimpleInjector;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using SimpleInjector;
 
-var container = new Container();
+using var container = new Container();
+container.RegisterInstance<ILoggerFactory>(NullLoggerFactory.Instance);
 
-// Option 1: Scan by marker type (recommended)
+// Scan the assembly containing UserProfile.
 container.AddAutoMapper(typeof(UserProfile));
-
-// Option 2: Scan multiple assemblies
-container.AddAutoMapper(typeof(UserProfile).Assembly, typeof(OrderProfile).Assembly);
-
-// Option 3: Scan with configuration
-container.AddAutoMapper(cfg =>
-{
-    cfg.WithMapperAssemblyMarkerTypes(typeof(UserProfile));
-    cfg.AsScoped(); // Change lifestyle if needed
-});
 ```
 
 ### 3. Use IMapper in Your Services
 
 ```csharp
+using AutoMapper;
+
 public class UserService
 {
     private readonly IMapper _mapper;
@@ -90,6 +95,17 @@ public class UserService
         return _mapper.Map<UserDto>(entity);
     }
 }
+```
+
+Add this to your container setup after `AddAutoMapper`:
+
+```csharp
+container.Register<UserService>();
+container.Verify();
+
+var service = container.GetInstance<UserService>();
+var dto = service.GetUser(new UserEntity(1, "Ada"));
+Console.WriteLine(dto.Name); // Ada
 ```
 
 ## What Gets Registered?
@@ -113,78 +129,96 @@ _*Lifestyle is configurable (Singleton/Scoped/Transient)_
 
 ## Usage Examples
 
+Each registration example is an alternative to the quick start's `AddAutoMapper`
+call. Use one per container.
+
 ### Basic Usage - Scan by Type
 
 ```csharp
 container.AddAutoMapper(typeof(UserProfile), typeof(OrderProfile));
 ```
 
-### Scan Assemblies from Your Solution
+### Scan an Explicit List of Assemblies
 
 ```csharp
-public static class AutoMapperConfigurator
-{
-    private const string NamespacePrefix = "YourCompany.YourProject";
-
-    public static void Configure(Container container)
-    {
-        var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-        var assemblies = new List<Assembly>();
-        var mainAssembly = typeof(AutoMapperConfigurator).Assembly;
-        var refAssemblies = mainAssembly.GetReferencedAssemblies();
-        
-        foreach (var assemblyName in refAssemblies
-            .Where(a => a.FullName.StartsWith(NamespacePrefix, StringComparison.OrdinalIgnoreCase)))
-        {
-            var assembly = loadedAssemblies.Find(l => l.FullName == assemblyName.FullName)
-                ?? AppDomain.CurrentDomain.Load(assemblyName);
-            assemblies.Add(assembly);
-        }
-        
-        container.AddAutoMapper(assemblies);
-    }
-}
+container.AddAutoMapper(typeof(UserProfile).Assembly, typeof(OrderProfile).Assembly);
 ```
 
 ### Using Custom Resolvers with Dependency Injection
 
-Your custom resolvers can have dependencies automatically injected:
+Register the resolver's dependencies in SimpleInjector and configure the member
+with `MapFrom<TResolver>()`. The resolver must be in a scanned assembly.
 
 ```csharp
-public class DependencyResolver : IValueResolver<Source, Dest, int>
+using AutoMapper;
+
+public class ResolverProfile : Profile
 {
-    private readonly ISomeService _service;
-
-    public DependencyResolver(ISomeService service)
+    public ResolverProfile()
     {
-        _service = service;
-    }
-
-    public int Resolve(Source source, Dest dest, int destMember, ResolutionContext context)
-    {
-        return _service.Modify(destMember);
+        CreateMap<Source2, Dest2>()
+            .ForMember(d => d.ResolvedValue, opt => opt.MapFrom<DependencyResolver>());
     }
 }
 
-// Registration
-container.Register<ISomeService, SomeService>();
-container.AddAutoMapper(typeof(DependencyResolver));
-
-// The resolver will automatically get ISomeService injected!
+public class DependencyResolver(ISomeService service) : IValueResolver<Source2, Dest2, int>
+{
+    public int Resolve(Source2 source, Dest2 destination, int destMember, ResolutionContext context)
+    {
+        return service.Modify(source.Value);
+    }
+}
 ```
+
+For example, if `FooService(5)` adds 5 to its input:
+
+```csharp
+container.Register<ISomeService>(() => new FooService(5), Lifestyle.Transient);
+container.AddAutoMapper(typeof(ResolverProfile));
+
+var mapper = container.GetInstance<AutoMapper.IMapper>();
+var dest = mapper.Map<Dest2>(new Source2 { Value = 10 });
+Console.WriteLine(dest.ResolvedValue); // 15
+```
+
+See the complete [console sample](samples/TestApp). Set `AUTOMAPPER_LICENSE_KEY`
+in your environment before running it. From the repository root:
+
+```bash
+dotnet run --project samples/TestApp --framework net11.0
+```
+
+The sample prints `Mapped value: 7` and `Resolved value: 15`. Use
+`--framework net10.0` to run it on .NET 10.
 
 ## Advanced Configuration
 
 ### Change IMapper Lifestyle (Scoped/Transient)
 
+For a scoped mapper, set the default scoped lifestyle before the first container
+registration. Resolve `IMapper` inside an active scope. The default mapper
+lifestyle is singleton; use `AsTransient()` for a new mapper on each resolution.
+
 ```csharp
+using AdaskoTheBeAsT.AutoMapper.SimpleInjector;
+using AutoMapper;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using SimpleInjector;
+using SimpleInjector.Lifestyles;
+
+using var container = new Container();
+container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
+container.RegisterInstance<ILoggerFactory>(NullLoggerFactory.Instance);
 container.AddAutoMapper(cfg =>
 {
     cfg.WithMapperAssemblyMarkerTypes(typeof(UserProfile));
-    cfg.AsScoped();      // Use Scoped lifestyle
-    // or cfg.AsTransient(); // Use Transient lifestyle
-    // or cfg.AsSingleton(); // Default: Singleton
+    cfg.AsScoped();
 });
+
+using var scope = AsyncScopedLifestyle.BeginScope(container);
+var mapper = container.GetInstance<IMapper>();
+var dto = mapper.Map<UserDto>(new UserEntity(1, "Ada"));
 ```
 
 ### Custom Mapper Configuration
@@ -195,7 +229,7 @@ Add custom mappings programmatically:
 container.AddAutoMapper(cfg =>
 {
     cfg.WithAssembliesToScan(assemblies);
-    cfg.WithMapperConfigurationExpressionAction((container, expression) =>
+    cfg.WithMapperConfigurationExpressionAction((_, expression) =>
     {
         // Add custom mappings
         expression.CreateMap<Foo, Bar>().ReverseMap();
@@ -208,12 +242,12 @@ container.AddAutoMapper(cfg =>
 
 ### Using Custom IMapper Implementation
 
-```csharp
-public class MyCustomMapper : IMapper
-{
-    // Your custom implementation
-}
+If you already have a custom type that implements `IMapper`, register it with
+`Using<TMapper>()`. AutoMapper's `Mapper` class is sealed. Your implementation
+can take `IConfigurationProvider` in its constructor to use the configuration
+built from your profiles.
 
+```csharp
 container.AddAutoMapper(cfg =>
 {
     cfg.Using<MyCustomMapper>();
@@ -224,29 +258,32 @@ container.AddAutoMapper(cfg =>
 ### Unit Testing with Mock IMapper
 
 Perfect for unit tests using Moq or similar frameworks.
-When using a custom mapper instance via `Using(Func<IMapper>)`, `IConfigurationProvider` is **not** registered
-in the container, since the custom mapper fully replaces the default AutoMapper pipeline:
+`Using(Func<IMapper>)` calls the factory once during registration and uses the
+returned mapper instead of constructing AutoMapper's configuration. You do not need
+to scan profiles for a mock, and the library does not register `IConfigurationProvider`.
 
 ```csharp
+using AutoMapper;
+using Moq;
+
 var testMapper = new Mock<IMapper>();
 testMapper.Setup(m => m.Map<UserDto>(It.IsAny<UserEntity>()))
-    .Returns(new UserDto { Id = 1, Name = "Test User" });
+    .Returns(new UserDto(1, "Test User"));
 
-container.AddAutoMapper(cfg =>
-{
-    cfg.Using(() => testMapper.Object);
-    cfg.WithMapperAssemblyMarkerTypes(typeof(UserProfile));
-});
+container.AddAutoMapper(cfg => cfg.Using(() => testMapper.Object));
 ```
 
-### Setting AutoMapper License Key
+### Setting the AutoMapper License Key
 
-If you're using AutoMapper's premium features:
+AutoMapper 16.3 reads `AUTOMAPPER_LICENSE_KEY` from the environment, falling back
+to `LUCKYPENNY_LICENSE_KEY`. If your application gets the key from its own
+configuration or secret store, pass it to `WithLicenseKey` instead. An explicit
+key takes precedence. Do not hard-code the key in source.
 
 ```csharp
 container.AddAutoMapper(cfg =>
 {
-    cfg.WithLicenseKey("your-license-key");
+    cfg.WithLicenseKey(licenseKey);
     cfg.WithMapperAssemblyMarkerTypes(typeof(UserProfile));
 });
 ```
@@ -285,9 +322,16 @@ public class EmployeesController
 
 ### Using ProjectTo for Entity Framework / LINQ
 
-For efficient database queries, use `ProjectTo` to project directly to DTOs:
+Use `ProjectTo` to project directly to DTOs. Define `CreateProjection<Order, OrderDto>()`
+in your profile for a query-only mapping. Apply entity filters and sorting before
+projecting. Use `Map` after materializing the query if the mapping requires a
+dependency-injected resolver or other logic the query provider cannot translate.
 
 ```csharp
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+
 public class OrderService
 {
     private readonly DbContext _dbContext;
@@ -302,7 +346,7 @@ public class OrderService
     // Option 1: Using IConfigurationProvider directly (recommended)
     public async Task<List<OrderDto>> GetOrdersAsync()
     {
-        return await _dbContext.Orders
+        return await _dbContext.Set<Order>()
             .ProjectTo<OrderDto>(_configurationProvider)
             .ToListAsync();
     }
@@ -312,6 +356,9 @@ public class OrderService
 Or inject `IMapper` instead:
 
 ```csharp
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+
 public class OrderService
 {
     private readonly DbContext _dbContext;
@@ -323,11 +370,10 @@ public class OrderService
         _mapper = mapper;
     }
 
-    // Option 2: Using IMapper.ConfigurationProvider
+    // Option 2: Using IMapper.ProjectTo
     public async Task<List<OrderDto>> GetOrdersAsync()
     {
-        return await _dbContext.Orders
-            .ProjectTo<OrderDto>(_mapper.ConfigurationProvider)
+        return await _mapper.ProjectTo<OrderDto>(_dbContext.Set<Order>())
             .ToListAsync();
     }
 }
@@ -350,14 +396,15 @@ public class OrderService
 | Method                                         | Description                                                                                                  |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `WithMapperAssemblyMarkerTypes(params Type[])` | Specify types to mark assemblies for scanning (eagerly materialized, throws on null)                         |
+| `WithMapperAssemblyMarkerTypes(IEnumerable<Type>)` | Specify a sequence of types to mark assemblies for scanning                                               |
 | `WithAssembliesToScan(IEnumerable<Assembly>)`  | Specify assemblies to scan directly (defensively copied, throws on null)                                     |
 | `Using<TMapper>()`                             | Use a custom `IMapper` implementation                                                                        |
-| `Using(Func<IMapper>)`                         | Use a factory function to create `IMapper` (useful for testing; skips `IConfigurationProvider` registration) |
+| `Using(Func<IMapper>)`                         | Create a replacement `IMapper` once (useful for testing; skips `IConfigurationProvider` registration)        |
 | `AsSingleton()`                                | Register `IMapper` as Singleton (default)                                                                    |
 | `AsScoped()`                                   | Register `IMapper` as Scoped                                                                                 |
 | `AsTransient()`                                | Register `IMapper` as Transient                                                                              |
 | `WithMapperConfigurationExpressionAction(...)` | Add custom mapper configuration                                                                              |
-| `WithLicenseKey(string)`                       | Set AutoMapper license key (only applied when non-null/non-empty)                                            |
+| `WithLicenseKey(string)`                       | Set an explicit AutoMapper license key (rejects null; ignores an empty key)                                   |
 
 ## Requirements
 
@@ -376,10 +423,8 @@ frameworks.
 dotnet test --configuration Release
 ```
 
-The test suite needs an AutoMapper license key. AutoMapper resolves it from the environment
-(`AUTOMAPPER_LICENSE_KEY`, then the shared `LUCKYPENNY_LICENSE_KEY`) unless a key is passed
-explicitly via `WithLicenseKey(...)`. In CI the value comes from the `AUTOMAPPER_LICENSE_KEY`
-GitHub secret (see `.github/workflows/ci.yml`).
+The test suite checks that `AUTOMAPPER_LICENSE_KEY` is set. In CI the value comes
+from the `AUTOMAPPER_LICENSE_KEY` GitHub secret (see `.github/workflows/ci.yml`).
 
 To supply it locally, copy the template and fill in your key:
 
