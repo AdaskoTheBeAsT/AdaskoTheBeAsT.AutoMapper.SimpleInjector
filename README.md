@@ -199,7 +199,7 @@ container.AddAutoMapper(cfg =>
     {
         // Add custom mappings
         expression.CreateMap<Foo, Bar>().ReverseMap();
-        
+
         // Configure global settings
         expression.AllowNullCollections = true;
     });
