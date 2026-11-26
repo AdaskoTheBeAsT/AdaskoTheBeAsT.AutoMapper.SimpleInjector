@@ -30,7 +30,7 @@ This library eliminates the boilerplate of manually registering AutoMapper with 
 - 🔄 **Auto-registers** all AutoMapper extensions (`ITypeConverter`, `IValueResolver`, `IMemberValueResolver`, `IValueConverter`, `IDestinationFactory`, `ICondition`, `IPreCondition`, `IMappingAction`)
 - 💉 **Handles dependency injection** for your custom converters and resolvers
 - ⚙️ **Configures everything** with a single fluent API call
-- 🎯 **Supports .NET 8, 9, and 10**
+- 🎯 **Targets .NET 10 and .NET 11**
 
 ## Installation
 
@@ -199,7 +199,7 @@ container.AddAutoMapper(cfg =>
     {
         // Add custom mappings
         expression.CreateMap<Foo, Bar>().ReverseMap();
-        
+
         // Configure global settings
         expression.AllowNullCollections = true;
     });
@@ -361,14 +361,19 @@ public class OrderService
 
 ## Requirements
 
-- **.NET 8.0, 9.0, or 10.0**
-- **AutoMapper 15.1.0+**
-- **SimpleInjector 5.5.0+**
+- **.NET 10.0 or 11.0** (.NET 8 and 9 are no longer targeted)
+- **AutoMapper 16.3.0 or later, below 17.0.0**
+- **SimpleInjector 5.6.0 or later, below 6.0.0**
 
 ## Running Tests Locally
 
+Install the .NET 11 SDK to build the solution and the .NET 10 runtime to run the
+`net10.0` tests. Run the following from the repository root. The `global.json` file
+selects Microsoft.Testing.Platform, and the command runs the tests for both target
+frameworks.
+
 ```bash
-dotnet test
+dotnet test --configuration Release
 ```
 
 The test suite needs an AutoMapper license key. AutoMapper resolves it from the environment
@@ -395,6 +400,17 @@ set in the environment are never overwritten, so CI values always win over the f
 This works the same for `dotnet test` and for the test runners in Visual Studio, Rider, and VS Code.
 If you prefer not to keep a file in the working tree, set a user-level environment variable instead
 (`setx AUTOMAPPER_LICENSE_KEY "your-license-key"` on Windows) and restart your IDE or shell.
+
+## NuGet Releases
+
+The [CI workflow](.github/workflows/ci.yml) publishes packages to NuGet.org only after
+the build succeeds for a lightweight version tag such as `v16.3.0`. Annotated tags
+do not trigger package publishing.
+
+Before releasing, configure [NuGet Trusted Publishing](https://learn.microsoft.com/en-us/nuget/nuget-org/trusted-publishing)
+for this repository and set the `NUGET_USER` GitHub Actions secret to the NuGet.org
+username, not the email address. The publish job uses a short-lived token instead
+of a stored NuGet API key.
 
 ## Credits
 

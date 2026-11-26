@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net10.0;net9.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net11.0;net10.0</TargetFrameworks>
     <ProjectGuid>{DA80F732-3A65-4DAF-A4FB-B0395D4A8D8D}</ProjectGuid>
   </PropertyGroup>
 
@@ -21,7 +21,7 @@
     <Copyright>Adam "AdaskoTheBeAsT" Pluciński</Copyright>
     <PackageTags>AutoMapper;SimpleInjector</PackageTags>
     <PackageReleaseNotes>
-      - .NET 10 release
+      - .NET 11 release
     </PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
@@ -32,7 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="[16.2.0,17.0.0)" />
+    <PackageReference Include="AutoMapper" Version="[16.3.0,17.0.0)" />
     <PackageReference Include="SimpleInjector" Version="[5.6.0,6.0.0)" />
   </ItemGroup>
 
