@@ -241,6 +241,7 @@ visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public
 ###############################
 # ReSharper properties        #
 ###############################
+[*.{cs,vb}]
 resharper_csharp_wrap_after_declaration_lpar = true
 resharper_csharp_wrap_after_invocation_lpar = true
 resharper_csharp_wrap_before_binary_opsign = true
@@ -254,7 +255,10 @@ resharper_keep_existing_embedded_block_arrangement = false
 resharper_keep_existing_enum_arrangement = false
 resharper_keep_existing_expr_member_arrangement = false
 resharper_keep_existing_switch_expression_arrangement = false
-resharper_place_constructor_initializer_on_same_line = false
+resharper_csharp_place_constructor_initializer_on_same_line = false
+# Applies to base-constructor calls such as ': Base(value)'.
+# Interface lists such as ': IService' keep their existing line breaks.
+resharper_csharp_place_primary_constructor_initializer_on_same_line = false
 resharper_place_simple_initializer_on_single_line = false
 resharper_place_type_constraints_on_same_line = false
 resharper_wrap_array_initializer_style = chop_always

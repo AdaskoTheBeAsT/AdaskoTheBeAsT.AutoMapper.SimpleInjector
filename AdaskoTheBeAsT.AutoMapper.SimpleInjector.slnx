@@ -1,15 +1,8 @@
 <Solution>
-  <Folder Name="/.config/">
-    <File Path=".config/dotnet-tools.json" />
-  </Folder>
-  <Folder Name="/.dotcover/">
-    <File Path=".dotcover/.gitkeep" />
-  </Folder>
   <Folder Name="/.props/">
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
     <File Path=".runsettings" />
-    <File Path="AdaskoTheBeAsT.AutoMapper.SimpleInjector.sln.DotSettings" />
     <File Path="AdaskoTheBeAsT.ruleset" />
     <File Path="DeterministicBuild.targets" />
     <File Path="Directory.Build.props" />
